@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "trendtrack-frontend",
+			"path": "../trendtrack-frontend"
+		}
+	],
+	"settings": {}
+}
