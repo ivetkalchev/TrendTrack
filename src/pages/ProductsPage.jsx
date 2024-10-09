@@ -13,27 +13,30 @@ const ProductsPage = () => {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/products');
-      setProducts(response.data.products || response.data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchProducts = () => {
+    axios.get('http://localhost:8080/products')
+      .then((response) => {
+        setProducts(response.data.products);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };  
 
-  const handleAddProduct = async (e) => {
+  const handleAddProduct = (e) => {
     e.preventDefault();
-    try {
-      await axios.post('http://localhost:8080/products', newProduct);
-      setNewProduct({ name: '', price: '', quantity: '', description: '' });
-      fetchProducts();
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+    axios.post('http://localhost:8080/products', newProduct)
+      .then(() => {
+        setNewProduct({ name: '', price: '', quantity: '', description: '' });
+        fetchProducts();
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

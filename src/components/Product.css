@@ -7,8 +7,8 @@ ul {
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Space between the items */
-  justify-content: space-between; /* Ensure even spacing */
+  gap: 20px; 
+  justify-content: space-between; 
   padding: 0;
   margin: 0;
 }
@@ -21,9 +21,9 @@ ul {
   color: #d83e23;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  flex: 1 1 calc(33.333% - 20px); /* Ensure 3 items per row with proper gap */
+  flex: 1 1 calc(33.333% - 20px);
   box-sizing: border-box;
-  margin-bottom: 20px; /* Add margin at the bottom for proper spacing */
+  margin-bottom: 20px; 
 }
 
 .product-item:hover {
@@ -39,18 +39,4 @@ ul {
 
 .product-price {
   font-weight: bold;
-}
-
-.view-details-button {
-  background-color: #ff6347;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.view-details-button:hover {
-  background-color: #ff7f50;
 }
