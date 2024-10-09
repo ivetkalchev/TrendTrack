@@ -5,14 +5,13 @@ import './Header.css';
 const Header = () => {
   return (
     <header>
-      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}> {}
+      <Link to="/" className="header-title">
         <h1>TrendTrack</h1>
       </Link>
       <nav>
         <Link to="/products">Products</Link>
-        {}
         <Link to="/aboutus">About Us</Link>
-        {}  
+        <Link to="/login">Login</Link>
       </nav>
     </header>
   );
