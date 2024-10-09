@@ -7,21 +7,33 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/products');
-        setProducts(response.data.products || response.data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const [newProduct, setNewProduct] = useState({ name: '', price: '', quantity: '', description: '' });
 
+  useEffect(() => {
     fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/products');
+      setProducts(response.data.products || response.data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:8080/products', newProduct);
+      setNewProduct({ name: '', price: '', quantity: '', description: '' });
+      fetchProducts();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -29,10 +41,42 @@ const ProductsPage = () => {
   return (
     <div>
       <h2>Product List</h2>
+      <form onSubmit={handleAddProduct}>
+        <input 
+          type="text" 
+          placeholder="Name" 
+          value={newProduct.name} 
+          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} 
+          required 
+        />
+        <input 
+          type="number" 
+          placeholder="Price" 
+          value={newProduct.price} 
+          onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} 
+          required 
+        />
+        <input 
+          type="number" 
+          placeholder="Quantity" 
+          value={newProduct.quantity} 
+          onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })} 
+          required 
+        />
+        <input 
+          type="text" 
+          placeholder="Description" 
+          value={newProduct.description} 
+          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} 
+          required 
+        />
+        <button type="submit">Add Product</button>
+      </form>
+
       {products.length === 0 ? (
         <p>No products available.</p>
       ) : (
-        <ul>
+        <ul className="product-list">
           {products.map((product) => (
             <Product product={product} key={product.idProduct} />
           ))}
