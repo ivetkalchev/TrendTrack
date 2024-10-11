@@ -42,13 +42,27 @@ const ProductManagementPage = () => {
       .then(() => {
         setProducts(products.filter(product => product.id !== id));
         setFilteredProducts(filteredProducts.filter(product => product.id !== id));
-        fetchProducts();
       })
       .catch((error) => {
         setError(error.message);
       });
   };  
 
+  const handleUpdate = (updatedProduct) => {
+    axios.put(`http://localhost:8080/products/${updatedProduct.id}`, updatedProduct)
+      .then(() => {
+        setProducts(products.map(product =>
+          product.id === updatedProduct.id ? updatedProduct : product
+        ));
+        setFilteredProducts(filteredProducts.map(product =>
+          product.id === updatedProduct.id ? updatedProduct : product
+        ));
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+  
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">Error: {error}</div>;
 
@@ -65,6 +79,7 @@ const ProductManagementPage = () => {
               key={`${product.id}`}
               product={product}
               onDelete={handleDelete}
+              onUpdate={handleUpdate} // Pass handleUpdate here
             />
           ))}
         </div>

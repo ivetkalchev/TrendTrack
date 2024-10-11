@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProductAdmin.css';
+import EditProductForm from './EditProduct';
 
-const ProductAdmin = ({ product, onDelete }) => {
-  const handleDelete = () => {
-    onDelete(product.id);
+const ProductAdmin = ({ product, onDelete, onUpdate }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEdit = (updatedProduct) => {
+    onUpdate(updatedProduct);
   };
 
   return (
@@ -13,8 +16,16 @@ const ProductAdmin = ({ product, onDelete }) => {
       <p className="product-price">Price: €{product.price}</p>
       <p className="product-description">Quantity: {product.quantity}</p>
       <div className="button-container">
-        <button onClick={handleDelete} className="delete-button">Delete</button>
+        <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
+        <button onClick={() => onDelete(product.id)} className="delete-button">Delete</button>
       </div>
+      {isEditing && (
+        <EditProductForm
+          product={product}
+          onUpdate={handleEdit}
+          onClose={() => setIsEditing(false)}
+        />
+      )}
     </div>
   );
 };
