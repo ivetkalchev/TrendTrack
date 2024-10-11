@@ -1,15 +1,9 @@
-footer {
-    background: linear-gradient(90deg, #ffdaba, #ffcac6);
-    padding: 10px 25px;
-    display: flex;
-    justify-content: space-between;
-    border-top: 2px solid #d83e23; 
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); 
-  }
-  
-  h1 {
-    color: #d83e23;
-    margin: 0;
-    font-size: 10px;
-    font-family: 'Georgia', serif;
-  }
+.footer {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  margin-top: 40px; 
+  padding: 20px 0; 
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+}

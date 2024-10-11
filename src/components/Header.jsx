@@ -9,9 +9,9 @@ const Header = () => {
         <h1>TrendTrack</h1>
       </Link>
       <nav>
-        <Link to="/products">Products</Link>
         <Link to="/aboutus">About Us</Link>
-        <Link to="/login">Login</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/productmanagment">Product Management</Link>
       </nav>
     </header>
   );
