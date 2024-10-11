@@ -1,0 +1,19 @@
+.about-us {
+    padding: 10px;
+    color: #333;
+    max-width: 800px; 
+    margin: 0 auto; 
+  }
+  
+  .about-us h1 {
+    font-size: 28px;
+    color: #D83E23; 
+    margin-bottom: 15px;
+  }
+  
+  .about-us p {
+    line-height: 1.6; 
+    margin-bottom: 2px;
+    text-align: justify;
+  }
+  

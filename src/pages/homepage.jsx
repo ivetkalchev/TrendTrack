@@ -6,12 +6,15 @@ const HomePage = () => {
     <div className="home-container">
 
       <section className="about-section">
-        <h2>About TrendTrack</h2>
+        <h2>Welcome to TrendTrack!</h2>
         <p>
-          At TrendTrack, we believe that fashion is not just about clothing—it's a form of self-expression. 
-          Our curated collections of fabrics, trims, and accessories are designed to inspire creativity and 
-          elevate your wardrobe. Whether you're a designer, a seamstress, or a fashion enthusiast, 
-          TrendTrack has everything you need to bring your vision to life.
+          At <strong>TrendTrack</strong>, we believe that fashion isn’t just about what you wear—it's a vibrant form of 
+          <strong> self-expression</strong>! 🌟 Our carefully curated collections of fabulous fabrics, stunning trims, 
+          and chic accessories are here to spark your creativity and elevate your wardrobe to new heights. 
+        </p>
+        <p>
+          Whether you’re a visionary designer, a crafty seamstress, or simply a fashion enthusiast, <strong>TrendTrack </strong> 
+          has everything you need to turn your dreams into reality. 🎨✨ Let’s create something magical together!
         </p>
       </section>
 
