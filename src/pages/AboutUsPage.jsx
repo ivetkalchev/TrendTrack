@@ -1,33 +1,39 @@
 import React from 'react';
-import './HomePage.css';
+import './AboutUsPage.css'; 
 
 const AboutUsPage = () => {
   return (
     <div className="about-us">
-      <h1>About TrendTrack</h1>
+      <h1>About Us</h1>
       <p>
-        TrendTrack is your go-to destination for the latest fabrics, trims, and accessories
-        in the fashion industry. We pride ourselves on offering high-quality materials to help 
-        you bring your creative visions to life.
+        <strong>TrendTrack Design Co.</strong> is not just a fashion manufacturing company; we are a vibrant hub of creativity 
+        and style, proudly based in the chic city of <strong>Eindhoven, Netherlands</strong>. Founded in <strong>1990</strong>, 
+        we’ve been weaving our magic for over three decades!
       </p>
       <p>
-        Our team is dedicated to providing exceptional customer service and ensuring that 
-        you find exactly what you need for your next project. Explore our extensive product 
-        range and discover the perfect materials to inspire your creativity.
-      </p>
-      <h2>Our History</h2>
-      <p>
-        TrendTrack was founded in 1998 by a group of passionate designers who saw the need for 
-        a one-stop shop for high-quality fashion materials. Starting from a small studio in 
-        Paris, TrendTrack quickly became known for its exceptional collection of fabrics and trims, 
-        attracting fashion houses and independent designers alike.
+        What do we do? Well, we specialize in the finest high-quality fabrics and trims! Think luxurious silks, comfy cottons, 
+        and eco-friendly materials that make your designs pop. 💃✨ In <strong>2019</strong>, we were thrilled to be ranked 
+        among the <strong>top 10 reliable distributors in Europe</strong>.
       </p>
       <p>
-        Over the years, TrendTrack expanded its operations globally, opening flagship stores in 
-        fashion capitals such as Milan, New York, and Tokyo. Today, TrendTrack is not only a trusted 
-        supplier for renowned fashion brands, but also a source of inspiration for up-and-coming 
-        designers. With a dedication to sustainability and innovation, we continue to push the 
-        boundaries of what's possible in the fashion industry.
+        But wait, there's more! 🌿 Sustainability is at the heart of our mission. Back in <strong>2010</strong>, 
+        we kicked off our <strong>"Green Fabric Initiative"</strong>. We’re all about using materials that are kind 
+        to our planet while still delivering on style. After all, looking good should never come at the cost of Mother Earth, 
+        right?
+      </p>
+      <p>
+        At TrendTrack, we believe in <strong>collaboration and creativity</strong>. Our workshops are bursting with energy, 
+        where designers and artists gather to experiment with our fabulous fabrics. 🎨 So whether you’re a small boutique 
+        or a grand fashion house, we treat every partnership like it’s the next big thing!
+      </p>
+      <p>
+        As we gaze into the future, we’re excited about bringing <strong>innovation</strong> to the forefront of fashion. 
+        Our team is always on the hunt for the next trend, ensuring our clients stay ahead of the curve. Let’s create a 
+        stylish, sustainable, and downright fun future together! 🎉
+      </p>
+      <p>
+        So, whether you're here for a new collection or just to say hello, welcome to the TrendTrack family! Together, 
+        let's make fashion fabulous and responsible. 💖
       </p>
     </div>
   );

@@ -1,84 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Product from '../components/Product';
-import '../components/Product.css'; 
+import ProductClient from '../components/ProductClient';
+import Filter from '../components/Filter';
+import './ProductsPage.css';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [newProduct, setNewProduct] = useState({ name: '', price: '', quantity: '', description: '' });
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/products');
-      setProducts(response.data.products || response.data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
+  const fetchProducts = () => {
+    axios.get('http://localhost:8080/products')
+      .then((response) => {
+        setProducts(response.data.products);
+        setFilteredProducts(response.data.products);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const handleAddProduct = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:8080/products', newProduct);
-      setNewProduct({ name: '', price: '', quantity: '', description: '' });
-      fetchProducts();
-    } catch (error) {
-      setError(error.message);
+  const handleFilter = (name, color) => {
+    let filtered = products;
+
+    if (name) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+      );
     }
+
+    if (color) {
+      filtered = filtered.filter((product) => product.color === color);
+    }
+
+    setFilteredProducts(filtered);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">Error: {error}</div>;
 
   return (
-    <div>
+    <div className="products-container">
       <h2>Product List</h2>
-      <form onSubmit={handleAddProduct}>
-        <input 
-          type="text" 
-          placeholder="Name" 
-          value={newProduct.name} 
-          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} 
-          required 
-        />
-        <input 
-          type="number" 
-          placeholder="Price" 
-          value={newProduct.price} 
-          onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} 
-          required 
-        />
-        <input 
-          type="number" 
-          placeholder="Quantity" 
-          value={newProduct.quantity} 
-          onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })} 
-          required 
-        />
-        <input 
-          type="text" 
-          placeholder="Description" 
-          value={newProduct.description} 
-          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} 
-          required 
-        />
-        <button type="submit">Add Product</button>
-      </form>
+      
+      <Filter onFilter={handleFilter} /> {}
 
-      {products.length === 0 ? (
+      {filteredProducts.length === 0 ? (
         <p>No products available.</p>
       ) : (
         <ul className="product-list">
-          {products.map((product) => (
-            <Product product={product} key={product.idProduct} />
+          {filteredProducts.map((product) => (
+            <ProductClient product={product} key={product.idProduct} />
           ))}
         </ul>
       )}
