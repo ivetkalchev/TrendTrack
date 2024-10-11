@@ -1,0 +1,18 @@
+.product-management-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.loading, .error {
+  text-align: center;
+  color: #D83E23;
+  font-size: 28px;
+  padding: 235px;
+}

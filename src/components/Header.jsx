@@ -11,10 +11,9 @@ const Header = () => {
       <nav>
         <Link to="/aboutus">About Us</Link>
         <Link to="/products">Products</Link>
-        <Link to="/productmanagment">Product Management</Link>
+        <Link to="/productmanagement">Product Management</Link> {/* Fixed here */}
       </nav>
     </header>
   );
 };
-
 export default Header;
