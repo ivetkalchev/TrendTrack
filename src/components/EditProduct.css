@@ -73,3 +73,19 @@
 .edit-product-form button[type="button"]:hover {
   background-color: #c82333;
 }
+
+.edit-product-form textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  height: 80px; 
+  resize: vertical; 
+}
+
+.edit-product-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}

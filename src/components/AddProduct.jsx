@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
-import './EditProduct.css';
+import './AddProduct.css';
 
-const EditProduct = ({ product, onUpdate, onClose }) => {
-  const [name, setName] = useState(product.name);
-  const [color, setColor] = useState(product.color);
-  const [price, setPrice] = useState(product.price);
-  const [quantity, setQuantity] = useState(product.quantity);
-  const [description, setDescription] = useState(product.description); // New state for description
+const AddProduct = ({ onAdd, onClose }) => {
+  const [name, setName] = useState('');
+  const [color, setColor] = useState('');
+  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [description, setDescription] = useState(''); // New state for description
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate({ ...product, name, color, price, quantity, description }); // Include description in update
-    onClose();
-  };
-
-  const handleColorChange = (e) => {
-    setColor(e.target.value);
+    const newProduct = {
+      name,
+      color,
+      price: parseFloat(price),
+      quantity: parseInt(quantity, 10),
+      description, // Include description in the new product object
+    };
+    onAdd(newProduct); // Call to handle adding the new product
+    onClose(); // Close the form
   };
 
   return (
-    <div className="edit-product-form">
-      <h3>Edit Product</h3>
+    <div className="add-product-form">
+      <h3>Add Product</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -29,8 +32,13 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           placeholder="Product Name"
           required
         />
-        
-        <select value={color} onChange={handleColorChange} className="color-select" required>
+        <textarea
+          value={description} // Bind description state
+          onChange={(e) => setDescription(e.target.value)} // Update description state
+          placeholder="Description"
+          required
+        />
+        <select value={color} onChange={(e) => setColor(e.target.value)} required>
           <option value="">Select Color</option>
           <option value="RED">Red</option>
           <option value="GREEN">Green</option>
@@ -45,7 +53,6 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           <option value="GREY">Grey</option>
           <option value="BEIGE">Beige</option>
         </select>
-
         <input
           type="number"
           value={price}
@@ -53,7 +60,6 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           placeholder="Price"
           required
         />
-        
         <input
           type="number"
           value={quantity}
@@ -61,19 +67,11 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           placeholder="Quantity"
           required
         />
-
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)} // Handle description change
-          placeholder="Description"
-          required
-        />
-        
-        <button type="submit">Update</button>
+        <button type="submit">Add</button>
         <button type="button" onClick={onClose}>Cancel</button>
       </form>
     </div>
   );
 };
 
-export default EditProduct;
+export default AddProduct;

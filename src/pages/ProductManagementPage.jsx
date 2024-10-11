@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductAdmin from '../components/ProductAdmin';
 import Filter from '../components/Filter';
+import AddProduct from '../components/AddProduct';
 import './ProductManagementPage.css';
 
 const ProductManagementPage = () => {
@@ -9,6 +10,7 @@ const ProductManagementPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isAdding, setIsAdding] = useState(false); 
 
   useEffect(() => {
     fetchProducts();
@@ -28,6 +30,19 @@ const ProductManagementPage = () => {
       });
   };
 
+  const handleAdd = (newProduct) => {
+    axios.post('http://localhost:8080/products', newProduct) 
+      .then((response) => {
+        setProducts([...products, response.data]); 
+        setFilteredProducts([...filteredProducts, response.data]); 
+      })
+      .catch((error) => {
+        console.error("Error adding product:", error.response?.data || error.message); 
+        setError(error.message);
+      });
+  };
+  
+
   const handleFilter = (name, color) => {
     const filtered = products.filter(product => {
       const matchesName = name ? product.name.toLowerCase().includes(name.toLowerCase()) : true;
@@ -46,7 +61,7 @@ const ProductManagementPage = () => {
       .catch((error) => {
         setError(error.message);
       });
-  };  
+  };
 
   const handleUpdate = (updatedProduct) => {
     axios.put(`http://localhost:8080/products/${updatedProduct.id}`, updatedProduct)
@@ -62,7 +77,7 @@ const ProductManagementPage = () => {
         setError(error.message);
       });
   };
-  
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">Error: {error}</div>;
 
@@ -70,6 +85,15 @@ const ProductManagementPage = () => {
     <div className="product-management-container">
       <h2>Product Management</h2>
       <Filter onFilter={handleFilter} />
+      <button onClick={() => setIsAdding(true)} className="add-product-button">Add Product</button>
+      
+      {isAdding && (
+        <AddProduct
+          onAdd={handleAdd}
+          onClose={() => setIsAdding(false)}
+        />
+      )}
+
       {filteredProducts.length === 0 ? (
         <p>No products available.</p>
       ) : (
@@ -79,7 +103,7 @@ const ProductManagementPage = () => {
               key={`${product.id}`}
               product={product}
               onDelete={handleDelete}
-              onUpdate={handleUpdate} // Pass handleUpdate here
+              onUpdate={handleUpdate}
             />
           ))}
         </div>
