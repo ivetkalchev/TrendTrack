@@ -4,13 +4,13 @@ import './EditProduct.css';
 const EditProduct = ({ product, onUpdate, onClose }) => {
   const [name, setName] = useState(product.name);
   const [color, setColor] = useState(product.color);
+  const [description, setDescription] = useState(product.description);
   const [price, setPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(product.quantity);
-  const [description, setDescription] = useState(product.description); // New state for description
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate({ ...product, name, color, price, quantity, description }); // Include description in update
+    onUpdate({ ...product, name, color, description, price, quantity });
     onClose();
   };
 
@@ -27,6 +27,13 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Product Name"
+          required
+        />
+
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
           required
         />
         
@@ -59,13 +66,6 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
           placeholder="Quantity"
-          required
-        />
-
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)} // Handle description change
-          placeholder="Description"
           required
         />
         

@@ -4,21 +4,21 @@ import './AddProduct.css';
 const AddProduct = ({ onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
+  const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [description, setDescription] = useState(''); // New state for description
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newProduct = {
       name,
+      description,
       color,
       price: parseFloat(price),
       quantity: parseInt(quantity, 10),
-      description, // Include description in the new product object
     };
-    onAdd(newProduct); // Call to handle adding the new product
-    onClose(); // Close the form
+    onAdd(newProduct); 
+    onClose();
   };
 
   return (
@@ -33,8 +33,8 @@ const AddProduct = ({ onAdd, onClose }) => {
           required
         />
         <textarea
-          value={description} // Bind description state
-          onChange={(e) => setDescription(e.target.value)} // Update description state
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           required
         />

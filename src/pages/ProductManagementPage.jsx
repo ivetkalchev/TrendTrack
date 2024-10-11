@@ -41,7 +41,6 @@ const ProductManagementPage = () => {
         setError(error.message);
       });
   };
-  
 
   const handleFilter = (name, color) => {
     const filtered = products.filter(product => {

@@ -11,7 +11,7 @@ const Header = () => {
       <nav>
         <Link to="/aboutus">About Us</Link>
         <Link to="/products">Products</Link>
-        <Link to="/productmanagement">Product Management</Link> {/* Fixed here */}
+        <Link to="/productmanagement">Product Management</Link>
       </nav>
     </header>
   );

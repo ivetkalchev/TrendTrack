@@ -22,16 +22,15 @@
   font-size: 1em;
   color: #333;
   text-align: center;
-  margin: 5px 0; /* Add margin for spacing */
+  margin: 5px 0;
 }
 
 .product-description {
-  max-height: 100px; /* Increase max height for description */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Add ellipsis for overflow */
-  display: -webkit-box; /* Required for ellipsis */
-  -webkit-box-orient: vertical; /* Required for ellipsis */
-  -webkit-line-clamp: 4; /* Increase number of lines to show */
+  max-height: 100px; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
 }
 
 .button-container {
