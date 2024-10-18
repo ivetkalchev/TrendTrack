@@ -25,7 +25,7 @@ const ProductClient = ({ product }) => {
       <div className="quantity-container">
         <input
           type="number"
-          id={`quantity-${product.idProduct}`}
+          id={`quantity-${product.id}`}
           value={quantity}
           min="1"
           max={product.quantity}

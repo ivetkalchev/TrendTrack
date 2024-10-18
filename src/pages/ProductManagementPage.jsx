@@ -37,7 +37,6 @@ const ProductManagementPage = () => {
         setFilteredProducts([...filteredProducts, response.data]); 
       })
       .catch((error) => {
-        console.error("Error adding product:", error.response?.data || error.message); 
         setError(error.message);
       });
   };
@@ -94,7 +93,7 @@ const ProductManagementPage = () => {
       )}
 
       {filteredProducts.length === 0 ? (
-        <p>No products available.</p>
+        <p>No results match your search.</p>
       ) : (
         <div className="product-list">
           {filteredProducts.map((product) => (

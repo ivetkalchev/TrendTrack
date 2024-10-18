@@ -29,18 +29,11 @@ const ProductsPage = () => {
   };
 
   const handleFilter = (name, color) => {
-    let filtered = products;
-
-    if (name) {
-      filtered = filtered.filter((product) =>
-        product.name.toLowerCase().includes(name.toLowerCase())
-      );
-    }
-
-    if (color) {
-      filtered = filtered.filter((product) => product.color === color);
-    }
-
+    const filtered = products.filter(product => {
+      const matchesName = name ? product.name.toLowerCase().includes(name.toLowerCase()) : true;
+      const matchesColor = color ? product.color === color : true;
+      return matchesName && matchesColor;
+    });
     setFilteredProducts(filtered);
   };
 
@@ -51,14 +44,14 @@ const ProductsPage = () => {
     <div className="products-container">
       <h2>Product List</h2>
       
-      <Filter onFilter={handleFilter} /> {}
-
+      <Filter onFilter={handleFilter} />
+      
       {filteredProducts.length === 0 ? (
-        <p>No products available.</p>
+        <p>No results match your search.</p>
       ) : (
         <ul className="product-list">
           {filteredProducts.map((product) => (
-            <ProductClient product={product} key={product.idProduct} />
+            <ProductClient product={product} key={product.id} />
           ))}
         </ul>
       )}
