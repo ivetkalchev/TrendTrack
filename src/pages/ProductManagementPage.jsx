@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductAdmin from '../components/ProductAdmin';
-import Filter from '../components/Filter';
 import AddProduct from '../components/AddProduct';
 import './ProductManagementPage.css';
 
 const ProductManagementPage = () => {
-  const [products, setProducts] = useState([]);
+  const [fabrics, setFabrics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [isAdding, setIsAdding] = useState(false); 
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    fetchProducts();
+    fetchFabrics();
   }, []);
 
-  const fetchProducts = () => {
-    axios.get('http://localhost:8080/products')
+  const fetchFabrics = () => {
+    setLoading(true);
+    setError(null);
+
+    axios.get('http://localhost:8080/fabrics')
       .then((response) => {
-        setProducts(response.data.products);
-        setFilteredProducts(response.data.products);
+        setFabrics(response.data.fabrics);
       })
       .catch((error) => {
         setError(error.message);
@@ -30,49 +30,44 @@ const ProductManagementPage = () => {
       });
   };
 
-  const handleAdd = (newProduct) => {
-    axios.post('http://localhost:8080/products', newProduct) 
+  const handleAdd = (newFabric) => {
+    setError(null); 
+
+    axios
+      .post('http://localhost:8080/fabrics', newFabric)
       .then((response) => {
-        setProducts([...products, response.data]); 
-        setFilteredProducts([...filteredProducts, response.data]); 
+        setFabrics([...fabrics, response.data]);
       })
       .catch((error) => {
-        setError(error.message);
+        setError(`Failed to add fabric: ${error.message}`);
       });
-  };
-
-  const handleFilter = (name, color) => {
-    const filtered = products.filter(product => {
-      const matchesName = name ? product.name.toLowerCase().includes(name.toLowerCase()) : true;
-      const matchesColor = color ? product.color === color : true;
-      return matchesName && matchesColor;
-    });
-    setFilteredProducts(filtered);
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/products/${id}`)
+    setError(null);
+
+    axios
+      .delete(`http://localhost:8080/fabrics/${id}`)
       .then(() => {
-        setProducts(products.filter(product => product.id !== id));
-        setFilteredProducts(filteredProducts.filter(product => product.id !== id));
+        setFabrics(fabrics.filter((fabric) => fabric.id !== id));
       })
       .catch((error) => {
-        setError(error.message);
+        setError(`Failed to delete fabric: ${error.message}`);
       });
   };
 
-  const handleUpdate = (updatedProduct) => {
-    axios.put(`http://localhost:8080/products/${updatedProduct.id}`, updatedProduct)
+  const handleUpdate = (updatedFabric) => {
+    setError(null);
+
+    axios
+      .put(`http://localhost:8080/fabrics/${updatedFabric.id}`, updatedFabric)
       .then(() => {
-        setProducts(products.map(product =>
-          product.id === updatedProduct.id ? updatedProduct : product
-        ));
-        setFilteredProducts(filteredProducts.map(product =>
-          product.id === updatedProduct.id ? updatedProduct : product
-        ));
+        setFabrics(
+          fabrics.map((fabric) => (fabric.id === updatedFabric.id ? updatedFabric : fabric))
+        );
       })
       .catch((error) => {
-        setError(error.message);
+        setError(`Failed to update fabric: ${error.message}`);
       });
   };
 
@@ -81,10 +76,11 @@ const ProductManagementPage = () => {
 
   return (
     <div className="product-management-container">
-      <h2>Product Management</h2>
-      <Filter onFilter={handleFilter} />
-      <button onClick={() => setIsAdding(true)} className="add-product-button">Add Product</button>
-      
+      <h2>Fabric Management</h2>
+      <button onClick={() => setIsAdding(true)} className="add-product-button">
+        Add Fabric
+      </button>
+
       {isAdding && (
         <AddProduct
           onAdd={handleAdd}
@@ -92,18 +88,19 @@ const ProductManagementPage = () => {
         />
       )}
 
-      {filteredProducts.length === 0 ? (
-        <p>No results match your search.</p>
+      {Array.isArray(fabrics) && fabrics.length === 0 ? (
+        <p>No fabrics available.</p>
       ) : (
         <div className="product-list">
-          {filteredProducts.map((product) => (
-            <ProductAdmin
-              key={`${product.id}`}
-              product={product}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-            />
-          ))}
+          {Array.isArray(fabrics) &&
+            fabrics.map((fabric) => (
+              <ProductAdmin
+                key={`${fabric.id}`}
+                product={fabric}
+                onDelete={handleDelete}
+                onUpdate={handleUpdate}
+              />
+            ))}
         </div>
       )}
     </div>

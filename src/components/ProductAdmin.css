@@ -5,7 +5,8 @@
   padding: 10px;
   margin: 10px;
   transition: transform 0.2s;
-  max-width: 300px; /* Optional: limit width */
+  max-width: 300px;
+  text-align: center;
 }
 
 .product-admin-item:hover {

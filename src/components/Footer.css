@@ -21,19 +21,13 @@
 }
 
 .footer-right a {
-  color: #D83E23;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-.footer-right a {
-  color: #D83E23;
+  color: #E76C2C;
   text-decoration: none;
   font-size: 20px;
   transition: color 0.3s ease, transform 0.3s ease; 
 }
 
 .footer-right a:hover {
-  color: #333;
-  transform: scale(1.2);
+  color: #D83E23;
+  transform: scale(1.05);
 }

@@ -3,19 +3,28 @@ import './EditProduct.css';
 
 const EditProduct = ({ product, onUpdate, onClose }) => {
   const [name, setName] = useState(product.name);
+  const [material, setMaterial] = useState(product.material);
   const [color, setColor] = useState(product.color);
   const [description, setDescription] = useState(product.description);
   const [price, setPrice] = useState(product.price);
-  const [quantity, setQuantity] = useState(product.quantity);
+  const [washable, setWashable] = useState(product.washable);
+  const [ironed, setIroned] = useState(product.ironed);
+  const [stock, setStock] = useState(product.stock);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate({ ...product, name, color, description, price, quantity });
+    onUpdate({
+      ...product,
+      name,
+      material,
+      color,
+      description,
+      price: parseFloat(price),
+      washable,
+      ironed,
+      stock: parseInt(stock, 10)
+    });
     onClose();
-  };
-
-  const handleColorChange = (e) => {
-    setColor(e.target.value);
   };
 
   return (
@@ -36,8 +45,18 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           placeholder="Description"
           required
         />
-        
-        <select value={color} onChange={handleColorChange} className="color-select" required>
+
+        <select value={material} onChange={(e) => setMaterial(e.target.value)} required>
+          <option value="">Select Material</option>
+          <option value="COTTON">Cotton</option>
+          <option value="WOOL">Wool</option>
+          <option value="LEATHER">Leather</option>
+          <option value="SILK">Silk</option>
+          <option value="DENIM">Denim</option>
+          <option value="POLYESTER">Polyester</option>
+        </select>
+
+        <select value={color} onChange={(e) => setColor(e.target.value)} required>
           <option value="">Select Color</option>
           <option value="RED">Red</option>
           <option value="GREEN">Green</option>
@@ -60,15 +79,37 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           placeholder="Price"
           required
         />
-        
+
+        <div className="checkbox-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={washable}
+              onChange={(e) => setWashable(e.target.checked)}
+            />
+            Washable
+          </label>
+        </div>
+
+        <div className="checkbox-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={ironed}
+              onChange={(e) => setIroned(e.target.checked)}
+            />
+            Ironed
+          </label>
+        </div>
+
         <input
           type="number"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-          placeholder="Quantity"
+          value={stock}
+          onChange={(e) => setStock(e.target.value)}
+          placeholder="Stock"
           required
         />
-        
+
         <button type="submit">Update</button>
         <button type="button" onClick={onClose}>Cancel</button>
       </form>

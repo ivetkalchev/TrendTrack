@@ -4,20 +4,26 @@ import './AddProduct.css';
 const AddProduct = ({ onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
+  const [material, setMaterial] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [washable, setWashable] = useState(false);
+  const [ironed, setIroned] = useState(false);
+  const [stock, setStock] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newProduct = {
       name,
       description,
+      material,
       color,
       price: parseFloat(price),
-      quantity: parseInt(quantity, 10),
+      washable,
+      ironed,
+      stock: parseInt(stock, 10),
     };
-    onAdd(newProduct); 
+    onAdd(newProduct);
     onClose();
   };
 
@@ -38,6 +44,13 @@ const AddProduct = ({ onAdd, onClose }) => {
           placeholder="Description"
           required
         />
+        <select value={material} onChange={(e) => setMaterial(e.target.value)} required>
+          <option value="">Select Material</option>
+          <option value="COTTON">Cotton</option>
+          <option value="POLYESTER">Polyester</option>
+          <option value="WOOL">Wool</option>
+          {/* Add other materials as needed */}
+        </select>
         <select value={color} onChange={(e) => setColor(e.target.value)} required>
           <option value="">Select Color</option>
           <option value="RED">Red</option>
@@ -62,11 +75,29 @@ const AddProduct = ({ onAdd, onClose }) => {
         />
         <input
           type="number"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-          placeholder="Quantity"
+          value={stock}
+          onChange={(e) => setStock(e.target.value)}
+          placeholder="Stock Quantity"
           required
         />
+        <div className="checkbox-container">
+          <label>
+            <input
+              type="checkbox"
+              checked={washable}
+              onChange={(e) => setWashable(e.target.checked)}
+            />
+            Washable
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={ironed}
+              onChange={(e) => setIroned(e.target.checked)}
+            />
+            Ironed
+          </label>
+        </div>
         <button type="submit">Add</button>
         <button type="button" onClick={onClose}>Cancel</button>
       </form>
