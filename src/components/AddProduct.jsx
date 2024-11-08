@@ -48,23 +48,28 @@ const AddProduct = ({ onAdd, onClose }) => {
           <option value="">Select Material</option>
           <option value="COTTON">Cotton</option>
           <option value="POLYESTER">Polyester</option>
+          <option value="SILK">Silk</option>
           <option value="WOOL">Wool</option>
-          {/* Add other materials as needed */}
+          <option value="LINEN">Linen</option>
+          <option value="LEATHER">Leather</option>
+          <option value="DENIM">Denim</option>
+          <option value="NYLON">Nylon</option>
+          <option value="SATIN">Satin</option>
+          <option value="VELVET">Velvet</option>
         </select>
         <select value={color} onChange={(e) => setColor(e.target.value)} required>
           <option value="">Select Color</option>
           <option value="RED">Red</option>
-          <option value="GREEN">Green</option>
           <option value="BLUE">Blue</option>
-          <option value="YELLOW">Yellow</option>
+          <option value="GREEN">Green</option>
           <option value="BLACK">Black</option>
           <option value="WHITE">White</option>
-          <option value="PURPLE">Purple</option>
+          <option value="YELLOW">Yellow</option>
           <option value="ORANGE">Orange</option>
+          <option value="PURPLE">Purple</option>
           <option value="PINK">Pink</option>
           <option value="BROWN">Brown</option>
           <option value="GREY">Grey</option>
-          <option value="BEIGE">Beige</option>
         </select>
         <input
           type="number"

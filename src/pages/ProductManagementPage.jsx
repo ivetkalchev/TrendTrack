@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getFabrics, addFabric, updateFabric, deleteFabric } from '../services/fabricService';
 import ProductAdmin from '../components/ProductAdmin';
 import AddProduct from '../components/AddProduct';
 import './ProductManagementPage.css';
@@ -14,61 +14,53 @@ const ProductManagementPage = () => {
     fetchFabrics();
   }, []);
 
-  const fetchFabrics = () => {
+  const fetchFabrics = async () => {
     setLoading(true);
     setError(null);
 
-    axios.get('http://localhost:8080/fabrics')
-      .then((response) => {
-        setFabrics(response.data.fabrics);
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const data = await getFabrics();
+      setFabrics(data.fabrics);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleAdd = (newFabric) => {
+  const handleAdd = async (newFabric) => {
+    setError(null);
+
+    try {
+      const addedFabric = await addFabric(newFabric);
+      setFabrics([...fabrics, addedFabric]);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
     setError(null); 
 
-    axios
-      .post('http://localhost:8080/fabrics', newFabric)
-      .then((response) => {
-        setFabrics([...fabrics, response.data]);
-      })
-      .catch((error) => {
-        setError(`Failed to add fabric: ${error.message}`);
-      });
+    try {
+      await deleteFabric(id);
+      setFabrics(fabrics.filter((fabric) => fabric.id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
-  const handleDelete = (id) => {
-    setError(null);
-
-    axios
-      .delete(`http://localhost:8080/fabrics/${id}`)
-      .then(() => {
-        setFabrics(fabrics.filter((fabric) => fabric.id !== id));
-      })
-      .catch((error) => {
-        setError(`Failed to delete fabric: ${error.message}`);
-      });
-  };
-
-  const handleUpdate = (updatedFabric) => {
-    setError(null);
-
-    axios
-      .put(`http://localhost:8080/fabrics/${updatedFabric.id}`, updatedFabric)
-      .then(() => {
-        setFabrics(
-          fabrics.map((fabric) => (fabric.id === updatedFabric.id ? updatedFabric : fabric))
-        );
-      })
-      .catch((error) => {
-        setError(`Failed to update fabric: ${error.message}`);
-      });
+  const handleUpdate = async (updatedFabric) => {
+    setError(null); 
+  
+    try {
+      const updated = await updateFabric(updatedFabric);
+      setFabrics((prevFabrics) => 
+        prevFabrics.map((fabric) => (fabric.id === updated.id ? updated : fabric))
+      );
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   if (loading) return <div className="loading">Loading...</div>;
@@ -88,19 +80,18 @@ const ProductManagementPage = () => {
         />
       )}
 
-      {Array.isArray(fabrics) && fabrics.length === 0 ? (
-        <p>No fabrics available.</p>
+      {fabrics.length === 0 ? (
+        <p>No results match your search.</p>
       ) : (
         <div className="product-list">
-          {Array.isArray(fabrics) &&
-            fabrics.map((fabric) => (
-              <ProductAdmin
-                key={`${fabric.id}`}
-                product={fabric}
-                onDelete={handleDelete}
-                onUpdate={handleUpdate}
-              />
-            ))}
+          {fabrics.map((fabric) => (
+            <ProductAdmin
+              key={`${fabric.id}`}
+              product={fabric}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
+          ))}
         </div>
       )}
     </div>

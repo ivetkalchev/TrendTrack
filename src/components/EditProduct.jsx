@@ -1,29 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './EditProduct.css';
 
 const EditProduct = ({ product, onUpdate, onClose }) => {
-  const [name, setName] = useState(product.name);
-  const [material, setMaterial] = useState(product.material);
-  const [color, setColor] = useState(product.color);
-  const [description, setDescription] = useState(product.description);
-  const [price, setPrice] = useState(product.price);
-  const [washable, setWashable] = useState(product.washable);
-  const [ironed, setIroned] = useState(product.ironed);
-  const [stock, setStock] = useState(product.stock);
+  const initialFormData = {
+    name: product.name,
+    material: product.material,
+    color: product.color,
+    description: product.description,
+    price: product.price,
+    washable: product.washable,
+    ironed: product.ironed,
+    stock: product.stock
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    setFormData(initialFormData);
+  }, [product]);
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate({
+    const updatedProduct = {
       ...product,
-      name,
-      material,
-      color,
-      description,
-      price: parseFloat(price),
-      washable,
-      ironed,
-      stock: parseInt(stock, 10)
-    });
+      ...formData,
+      price: parseFloat(formData.price),
+      stock: parseInt(formData.stock, 10)
+    };
+    onUpdate(updatedProduct);
+    setFormData(initialFormData);
+    onClose();
+  };
+
+  const handleCancel = () => {
+    setFormData(initialFormData);
     onClose();
   };
 
@@ -33,50 +51,75 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
           placeholder="Product Name"
           required
         />
 
         <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
           placeholder="Description"
           required
         />
 
-        <select value={material} onChange={(e) => setMaterial(e.target.value)} required>
+        <select
+          name="material"
+          value={formData.material}
+          onChange={handleInputChange}
+          required
+        >
           <option value="">Select Material</option>
           <option value="COTTON">Cotton</option>
-          <option value="WOOL">Wool</option>
-          <option value="LEATHER">Leather</option>
-          <option value="SILK">Silk</option>
-          <option value="DENIM">Denim</option>
           <option value="POLYESTER">Polyester</option>
+          <option value="SILK">Silk</option>
+          <option value="WOOL">Wool</option>
+          <option value="LINEN">Linen</option>
+          <option value="LEATHER">Leather</option>
+          <option value="DENIM">Denim</option>
+          <option value="NYLON">Nylon</option>
+          <option value="SATIN">Satin</option>
+          <option value="VELVET">Velvet</option>
         </select>
 
-        <select value={color} onChange={(e) => setColor(e.target.value)} required>
+        <select
+          name="color"
+          value={formData.color}
+          onChange={handleInputChange}
+          required
+        >
           <option value="">Select Color</option>
           <option value="RED">Red</option>
-          <option value="GREEN">Green</option>
           <option value="BLUE">Blue</option>
-          <option value="YELLOW">Yellow</option>
+          <option value="GREEN">Green</option>
           <option value="BLACK">Black</option>
           <option value="WHITE">White</option>
-          <option value="PURPLE">Purple</option>
+          <option value="YELLOW">Yellow</option>
           <option value="ORANGE">Orange</option>
+          <option value="PURPLE">Purple</option>
           <option value="PINK">Pink</option>
           <option value="BROWN">Brown</option>
           <option value="GREY">Grey</option>
-          <option value="BEIGE">Beige</option>
         </select>
 
         <input
           type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          name="price"
+          value={formData.price}
+          onChange={handleInputChange}
           placeholder="Price"
+          required
+        />
+
+        <input
+          type="number"
+          name="stock"
+          value={formData.stock}
+          onChange={handleInputChange}
+          placeholder="Stock"
           required
         />
 
@@ -84,8 +127,9 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           <label>
             <input
               type="checkbox"
-              checked={washable}
-              onChange={(e) => setWashable(e.target.checked)}
+              name="washable"
+              checked={formData.washable}
+              onChange={handleInputChange}
             />
             Washable
           </label>
@@ -95,23 +139,16 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           <label>
             <input
               type="checkbox"
-              checked={ironed}
-              onChange={(e) => setIroned(e.target.checked)}
+              name="ironed"
+              checked={formData.ironed}
+              onChange={handleInputChange}
             />
             Ironed
           </label>
         </div>
 
-        <input
-          type="number"
-          value={stock}
-          onChange={(e) => setStock(e.target.value)}
-          placeholder="Stock"
-          required
-        />
-
         <button type="submit">Update</button>
-        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="button" onClick={handleCancel}>Cancel</button>
       </form>
     </div>
   );
