@@ -13,6 +13,17 @@ const AddProduct = ({ onAdd, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (isNaN(price) || price <= 0) {
+      alert('Please enter a valid price.');
+      return;
+    }
+
+    if (isNaN(stock) || stock < 0) {
+      alert('Please enter a valid stock quantity.');
+      return;
+    }
+
     const newProduct = {
       name,
       description,
@@ -23,6 +34,7 @@ const AddProduct = ({ onAdd, onClose }) => {
       ironed,
       stock: parseInt(stock, 10),
     };
+    
     onAdd(newProduct);
     onClose();
   };
@@ -31,6 +43,7 @@ const AddProduct = ({ onAdd, onClose }) => {
     <div className="add-product-form">
       <h3>Add Product</h3>
       <form onSubmit={handleSubmit}>
+        
         <input
           type="text"
           value={name}
@@ -38,12 +51,14 @@ const AddProduct = ({ onAdd, onClose }) => {
           placeholder="Product Name"
           required
         />
+
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           required
         />
+
         <select value={material} onChange={(e) => setMaterial(e.target.value)} required>
           <option value="">Select Material</option>
           <option value="COTTON">Cotton</option>
@@ -57,6 +72,7 @@ const AddProduct = ({ onAdd, onClose }) => {
           <option value="SATIN">Satin</option>
           <option value="VELVET">Velvet</option>
         </select>
+
         <select value={color} onChange={(e) => setColor(e.target.value)} required>
           <option value="">Select Color</option>
           <option value="RED">Red</option>
@@ -71,6 +87,7 @@ const AddProduct = ({ onAdd, onClose }) => {
           <option value="BROWN">Brown</option>
           <option value="GREY">Grey</option>
         </select>
+
         <input
           type="number"
           value={price}
@@ -78,6 +95,7 @@ const AddProduct = ({ onAdd, onClose }) => {
           placeholder="Price"
           required
         />
+
         <input
           type="number"
           value={stock}
@@ -85,6 +103,7 @@ const AddProduct = ({ onAdd, onClose }) => {
           placeholder="Stock Quantity"
           required
         />
+
         <div className="checkbox-container">
           <label>
             <input
@@ -94,6 +113,7 @@ const AddProduct = ({ onAdd, onClose }) => {
             />
             Washable
           </label>
+
           <label>
             <input
               type="checkbox"
@@ -103,8 +123,10 @@ const AddProduct = ({ onAdd, onClose }) => {
             Ironed
           </label>
         </div>
+
         <button type="submit">Add</button>
         <button type="button" onClick={onClose}>Cancel</button>
+        
       </form>
     </div>
   );

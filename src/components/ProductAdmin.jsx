@@ -5,6 +5,13 @@ import EditProductForm from './EditProduct';
 const ProductAdmin = ({ product, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
 
+  const handleDelete = () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this fabric?');
+    if (confirmDelete) {
+      onDelete(product.id);
+    }
+  };
+
   const handleEdit = (updatedProduct) => {
     onUpdate(updatedProduct);
     setIsEditing(false);
@@ -21,9 +28,12 @@ const ProductAdmin = ({ product, onDelete, onUpdate }) => {
       <p className="product-description">Ironed: {product.ironed ? 'Yes' : 'No'}</p>
       <p className="product-description">Stock: {product.stock}</p>
       <div className="button-container">
+        
         <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
-        <button onClick={() => onDelete(product.id)} className="delete-button">Delete</button>
+        <button onClick={handleDelete} className="delete-button">Delete</button>
+        
       </div>
+      
       {isEditing && (
         <EditProductForm
           product={product}
@@ -31,6 +41,7 @@ const ProductAdmin = ({ product, onDelete, onUpdate }) => {
           onClose={() => setIsEditing(false)}
         />
       )}
+      
     </div>
   );
 };

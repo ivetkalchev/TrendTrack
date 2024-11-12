@@ -29,16 +29,27 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    if (isNaN(formData.price) || formData.price <= 0) {
+      alert('Please enter a valid price.');
+      return;
+    }
+  
+    if (isNaN(formData.stock) || formData.stock < 0) {
+      alert('Please enter a valid stock quantity.');
+      return;
+    }
+  
     const updatedProduct = {
       ...product,
       ...formData,
       price: parseFloat(formData.price),
       stock: parseInt(formData.stock, 10)
     };
+  
     onUpdate(updatedProduct);
-    setFormData(initialFormData);
     onClose();
-  };
+  };  
 
   const handleCancel = () => {
     setFormData(initialFormData);
@@ -70,8 +81,7 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           name="material"
           value={formData.material}
           onChange={handleInputChange}
-          required
-        >
+          required>
           <option value="">Select Material</option>
           <option value="COTTON">Cotton</option>
           <option value="POLYESTER">Polyester</option>
@@ -89,8 +99,7 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
           name="color"
           value={formData.color}
           onChange={handleInputChange}
-          required
-        >
+          required>
           <option value="">Select Color</option>
           <option value="RED">Red</option>
           <option value="BLUE">Blue</option>
@@ -149,6 +158,7 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
 
         <button type="submit">Update</button>
         <button type="button" onClick={handleCancel}>Cancel</button>
+
       </form>
     </div>
   );
