@@ -3,14 +3,19 @@ import './HomePage.css';
 
 const HomePage = () => {
   return (
-    <div className="about-us">
-      <h1 className="hero-title">About TrendTrack</h1>
+    <div className="home-container">
+      <section className="about-section">
+        <h2>Welcome to TrendTrack!</h2>
         <p>
-          TrendTrack is your go-to destination for the latest fabrics, trims, and accessories
-          in the fashion industry. We pride ourselves on offering high-quality materials to help 
-          you bring your creative visions to life.
+          At <strong>TrendTrack</strong>, we believe that fashion isn’t just about what you wear—it's a vibrant form of 
+          <strong> self-expression</strong>! Our carefully curated collections of fabulous fabrics, stunning trims, 
+          and chic accessories are here to spark your creativity and elevate your wardrobe to new heights. 
         </p>
-        <img src="fabric.webp"></img>
+        <p>
+          Whether you’re a visionary designer, a crafty seamstress, or simply a fashion enthusiast, <strong>TrendTrack </strong> 
+          has everything you need to turn your dreams into reality. Let’s create something magical together!
+        </p>
+      </section>
     </div>
   );
 };
