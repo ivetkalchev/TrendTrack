@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './AddProduct.css';
+import './AddFabric.css';
 
-const AddProduct = ({ onAdd, onClose }) => {
+const AddFabric = ({ onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
   const [material, setMaterial] = useState('');
@@ -41,14 +41,14 @@ const AddProduct = ({ onAdd, onClose }) => {
 
   return (
     <div className="add-product-form">
-      <h3>Add Product</h3>
+      <h3>Add Fabric</h3>
       <form onSubmit={handleSubmit}>
         
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Product Name"
+          placeholder="Name"
           required
         />
 
@@ -132,4 +132,4 @@ const AddProduct = ({ onAdd, onClose }) => {
   );
 };
 
-export default AddProduct;
+export default AddFabric;

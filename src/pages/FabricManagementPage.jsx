@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getFabrics, addFabric, updateFabric, deleteFabric } from '../services/fabricService';
-import ProductAdmin from '../components/ProductAdmin';
-import AddProduct from '../components/AddProduct';
-import './ProductManagementPage.css';
+import ProductAdmin from '../components/FabricControlPanel';
+import AddProduct from '../components/AddFabric';
+import './FabricManagementPage.css';
 
 const ProductManagementPage = () => {
   const [fabrics, setFabrics] = useState([]);

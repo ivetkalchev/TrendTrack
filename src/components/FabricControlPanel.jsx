@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './ProductAdmin.css';
-import EditProductForm from './EditProduct';
+import './FabricControlPanel.css';
+import EditProductForm from './EditFabric';
 
-const ProductAdmin = ({ product, onDelete, onUpdate }) => {
+const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDelete = () => {
@@ -46,4 +46,4 @@ const ProductAdmin = ({ product, onDelete, onUpdate }) => {
   );
 };
 
-export default ProductAdmin;
+export default FabricControlPanel;

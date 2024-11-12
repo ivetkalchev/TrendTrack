@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './EditProduct.css';
+import './EditFabric.css';
 
-const EditProduct = ({ product, onUpdate, onClose }) => {
+const EditFabric = ({ product, onUpdate, onClose }) => {
   const initialFormData = {
     name: product.name,
     material: product.material,
@@ -58,14 +58,14 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
 
   return (
     <div className="edit-product-form">
-      <h3>Edit Product</h3>
+      <h3>Edit Fabric</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          placeholder="Product Name"
+          placeholder="Name"
           required
         />
 
@@ -164,4 +164,4 @@ const EditProduct = ({ product, onUpdate, onClose }) => {
   );
 };
 
-export default EditProduct;
+export default EditFabric;
