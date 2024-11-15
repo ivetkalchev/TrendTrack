@@ -1,33 +1,95 @@
 .footer {
+  background-color: #f8f9fa;
+  padding: 40px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  width: 100%;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.footer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
-  color: #777;
-  margin-top: 50px;
-  padding: 20px 40px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #ddd;
+  margin-bottom: 30px;
 }
 
-.footer-left {
+.header-text h2 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.needle-icon {
+  width: 70px;
+  height: auto;
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px auto;
+  width: 99%;
+}
+
+.footer-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.footer-contact {
+  text-align: left;
   font-size: 16px;
   color: #555;
+  flex: 1;
 }
 
-.footer-right {
+.footer-social {
   display: flex;
-  gap: 20px;
+  gap: 10px; 
 }
 
-.footer-right a {
+.footer-social a {
   color: #4A334C;
-  text-decoration: none;
-  font-size: 20px;
-  transition: color 0.3s ease, transform 0.3s ease; 
+  font-size: 28px;
+  transition: color 0.3s ease;
 }
 
-.footer-right a:hover {
+.footer-social a:hover {
   color: #3e1c42;
-  transform: scale(1.05);
+}
+
+.footer-copyright {
+  font-size: 15px;
+  color: #777;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.footer-contact a {
+  color: #555;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: #4A334C;
+  text-decoration: underline;
 }
