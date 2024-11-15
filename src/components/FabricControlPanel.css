@@ -15,23 +15,7 @@
 
 .product-title {
   font-size: 1.5em;
-  color: #e64a19;
-}
-
-.product-description,
-.product-price {
-  font-size: 1em;
-  color: #333;
-  text-align: center;
-  margin: 5px 0;
-}
-
-.product-description {
-  max-height: 100px; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  display: -webkit-box; 
-  -webkit-box-orient: vertical; 
+  color: #110612;
 }
 
 .button-container {
@@ -41,7 +25,7 @@
 
 .edit-button,
 .delete-button {
-  background-color: #e64a19;
+  background-color: #1f9914;
   color: white;
   border: none;
   border-radius: 5px;
@@ -51,13 +35,13 @@
 }
 
 .edit-button:hover {
-  background-color: #d73e15;
+  background-color: #104f0a;
 }
 
 .delete-button {
-  background-color: #D83E23;
+  background-color: #911e0e;
 }
 
 .delete-button:hover {
-  background-color: #c72e1d;
+  background-color: #581209;
 }

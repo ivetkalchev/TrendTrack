@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .header-text h2 {
@@ -26,12 +26,13 @@
   font-weight: bold;
   color: #333;
   text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .footer-tagline {
   font-size: 18px;
   color: #555;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .needle-icon {
@@ -50,7 +51,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 
 .footer-contact {
@@ -68,18 +69,12 @@
 .footer-social a {
   color: #4A334C;
   font-size: 28px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease; 
 }
 
 .footer-social a:hover {
   color: #3e1c42;
-}
-
-.footer-copyright {
-  font-size: 15px;
-  color: #777;
-  margin-top: 10px;
-  text-align: left;
+  transform: scale(1.05);
 }
 
 .footer-contact a {

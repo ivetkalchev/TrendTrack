@@ -1,8 +1,8 @@
 import React from 'react';
 import './Footer.css';
-import { FaInstagram, FaLinkedin, FaTimes } from 'react-icons/fa'; 
-import { FiSearch } from 'react-icons/fi';
+import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'; 
 import needleIcon from "../assets/img/needle.png";
+import { FaTowerBroadcast } from 'react-icons/fa6';
 
 const Footer = () => {
   return (
@@ -28,12 +28,11 @@ const Footer = () => {
             <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
-            <a href="#" aria-label="Close">
-              <FaTimes />
+            <a href="https://www.twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter">
+              <FaTwitter />
             </a>
           </div>
         </div>
-        <p className="footer-copyright">© 2024 TrendTrack. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -3,6 +3,7 @@ import { getFabrics, addFabric, updateFabric, deleteFabric } from '../services/f
 import ProductAdmin from '../components/FabricControlPanel';
 import AddProduct from '../components/AddFabric';
 import './FabricManagementPage.css';
+import { FaPlus } from 'react-icons/fa'; 
 
 const ProductManagementPage = () => {
   const [fabrics, setFabrics] = useState([]);
@@ -57,16 +58,18 @@ const ProductManagementPage = () => {
       setError('Failed to update fabric. Please try again.');
     }
   };       
-  
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="product-management-container">
-      <h2>Fabric Management</h2>
-      <button onClick={() => setIsAdding(true)} className="add-product-button">
-        Add Fabric
-      </button>
+      <div className="header-container">
+        <h2>Fabric Management</h2>
+        <button onClick={() => setIsAdding(true)} className="add-product-button">
+          <FaPlus />
+        </button>
+      </div>
 
       {isAdding && (
         <AddProduct

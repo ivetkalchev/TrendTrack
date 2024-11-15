@@ -1,8 +1,8 @@
 import React from 'react';
 import './HomePage.css';
 import mouseIcon from "../assets/img/mouse.png";
-import fabricImage from "../assets/img/fabric.png"; // Add the fabric image here
-import scissorsIcon from "../assets/img/scissors.png"; // Add the scissors icon here
+import fabricImage from "../assets/img/fabric.png";
+import scissorsIcon from "../assets/img/scissors.png";
 
 const HomePage = () => {
   return (

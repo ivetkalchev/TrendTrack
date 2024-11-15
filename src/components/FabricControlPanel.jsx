@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './FabricControlPanel.css';
 import EditProductForm from './EditFabric';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,20 +21,14 @@ const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
   return (
     <div className="product-admin-item">
       <h3 className="product-title">{product.name}</h3>
-      <p className="product-description">{product.description}</p>
-      <p className="product-description">Material: {product.material}</p>
-      <p className="product-description">Color: {product.color}</p>
-      <p className="product-price">Price: €{product.price}</p>
-      <p className="product-description">Washable: {product.washable ? 'Yes' : 'No'}</p>
-      <p className="product-description">Ironed: {product.ironed ? 'Yes' : 'No'}</p>
-      <p className="product-description">Stock: {product.stock}</p>
       <div className="button-container">
-        
-        <button onClick={() => setIsEditing(true)} className="edit-button">Edit</button>
-        <button onClick={handleDelete} className="delete-button">Delete</button>
-        
+        <button onClick={() => setIsEditing(true)} className="edit-button">
+          <FaEdit /> Edit
+        </button>
+        <button onClick={handleDelete} className="delete-button">
+          <FaTrash /> Delete
+        </button>
       </div>
-      
       {isEditing && (
         <EditProductForm
           product={product}
@@ -41,7 +36,6 @@ const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
           onClose={() => setIsEditing(false)}
         />
       )}
-      
     </div>
   );
 };
