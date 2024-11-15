@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FabricControlPanel.css';
 import EditProductForm from './EditFabric';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaImage } from 'react-icons/fa'; // Import FaImage for placeholder
 import Swal from 'sweetalert2';
 
 const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
@@ -33,8 +33,21 @@ const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
     setIsEditing(false);
   };
 
+  const placeholderImage = (
+    <div className="placeholder-image">
+      <FaImage size={50} color="#ddd" />
+    </div>
+  );
+
   return (
     <div className="product-admin-item">
+      <div className="product-image">
+        {product.imageUrl ? (
+          <img src={product.imageUrl} alt={product.name} />
+        ) : (
+          placeholderImage
+        )}
+      </div>
       <div className="product-header">
         <h3 className="product-title">{product.name}</h3>
         <div className="button-container">
