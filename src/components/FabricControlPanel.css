@@ -6,42 +6,44 @@
   margin: 10px;
   transition: transform 0.2s;
   max-width: 300px;
-  text-align: center;
 }
 
 .product-admin-item:hover {
   transform: scale(1.02);
 }
 
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .product-title {
   font-size: 1.5em;
   color: #110612;
+  margin: 0;
+  font-size: 20px;
 }
 
 .button-container {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
 }
 
 .edit-button,
 .delete-button {
-  background-color: #1f9914;
-  color: white;
+  background-color: transparent;
+  color: #110612;
   border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 1.1em;
+  transition: color 0.3s;
 }
 
 .edit-button:hover {
-  background-color: #104f0a;
-}
-
-.delete-button {
-  background-color: #911e0e;
+  color: #1f9914;
 }
 
 .delete-button:hover {
-  background-color: #581209;
+  color: #911e0e;
 }
