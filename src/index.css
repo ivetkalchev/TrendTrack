@@ -1,8 +1,0 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap');
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
-  color: #333;
-  margin: 0px;
-}
