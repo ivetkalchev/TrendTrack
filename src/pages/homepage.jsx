@@ -22,15 +22,15 @@ const HomePage = () => {
         <div className="about-content">
           <div className="about-text">
             <p>
-              At <strong>TrendTrack</strong>, we believe that fashion isn’t just about what you wear—it’s a vibrant form of 
-              <strong> self-expression</strong>!
+              At TrendTrack, we believe that fashion isn’t just about what you wear—it’s a vibrant form of 
+              self-expression!
             </p>
             <p>
               Our carefully curated collections of fabulous fabrics, stunning trims, and chic accessories are here to spark your creativity 
               and elevate your wardrobe to new heights.
             </p>
             <p>
-              Whether you’re a visionary designer, a crafty seamstress, or simply a fashion enthusiast, <strong>TrendTrack </strong> 
+              Whether you’re a visionary designer, a crafty seamstress, or simply a fashion enthusiast, TrendTrack
               has everything you need to turn your dreams into reality.
             </p>
             <a href="/catalogue" className="browse-button">Browse Catalogue +</a>
