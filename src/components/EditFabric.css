@@ -42,7 +42,7 @@
 
 .edit-product-form input:focus,
 .edit-product-form select:focus {
-  border-color: #007bff;
+  border-color: #500153;
   outline: none;
 }
 
@@ -57,21 +57,21 @@
 }
 
 .edit-product-form button[type="submit"] {
-  background-color: #28a745;
+  background-color: #1f9914;
   color: white;
 }
 
 .edit-product-form button[type="submit"]:hover {
-  background-color: #218838;
+  background-color: #237234;
 }
 
 .edit-product-form button[type="button"] {
-  background-color: #dc3545;
+  background-color: #911e0e;
   color: white;
 }
 
 .edit-product-form button[type="button"]:hover {
-  background-color: #c82333;
+  background-color: #741c10;
 }
 
 .edit-product-form textarea {
@@ -86,7 +86,7 @@
 }
 
 .edit-product-form textarea:focus {
-  border-color: #007bff;
+  border-color: #500153;
   outline: none;
 }
 
@@ -106,4 +106,32 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+  accent-color: #500153;
+}
+
+.edit-product-form .checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.edit-product-form input,
+.edit-product-form select,
+.edit-product-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.edit-product-form button {
+  margin-top: 10px;
+}
+
+/* error */
+
+.edit-product-form .error {
+  font-size: 14px;
+  color: #d9534f;
+  margin: -40px;
+  text-align: left;
 }

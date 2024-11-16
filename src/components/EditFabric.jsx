@@ -1,59 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import './EditFabric.css';
 
 const EditFabric = ({ product, onUpdate, onClose }) => {
-  const initialFormData = {
-    name: product.name,
-    material: product.material,
-    color: product.color,
-    description: product.description,
-    price: product.price,
-    washable: product.washable,
-    ironed: product.ironed,
-    stock: product.stock,
-    pictureUrl: product.pictureUrl || ''
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: product.name,
+      material: product.material,
+      color: product.color,
+      description: product.description,
+      price: product.price,
+      washable: product.washable,
+      ironed: product.ironed,
+      stock: product.stock,
+      pictureUrl: product.pictureUrl || '',
+    },
+  });
 
-  const [formData, setFormData] = useState(initialFormData);
-
-  useEffect(() => {
-    setFormData(initialFormData);
-  }, [product]);
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (isNaN(formData.price) || formData.price <= 0) {
-      alert('Please enter a valid price.');
-      return;
-    }
-
-    if (isNaN(formData.stock) || formData.stock < 0) {
-      alert('Please enter a valid stock quantity.');
-      return;
-    }
-
-    if (
-      formData.pictureUrl &&
-      !/^(https?:\/\/.*\.(?:png|jpg|jpeg|svg|gif))$/.test(formData.pictureUrl)
-    ) {
-      alert('Please enter a valid image URL (e.g., http://example.com/image.jpg).');
-      return;
-    }
-
+  const onSubmit = (data) => {
     const updatedProduct = {
       ...product,
-      ...formData,
-      price: parseFloat(formData.price),
-      stock: parseInt(formData.stock, 10),
+      ...data,
+      price: parseFloat(data.price),
+      stock: parseInt(data.stock, 10),
     };
 
     onUpdate(updatedProduct);
@@ -61,36 +35,32 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
   };
 
   const handleCancel = () => {
-    setFormData(initialFormData);
+    reset();
     onClose();
   };
 
   return (
     <div className="edit-product-form">
       <h3>Edit Fabric</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
           placeholder="Name"
-          required
+          {...register('name', { required: 'Name is required' })}
         />
+        {errors.name && <p className="error">{errors.name.message}</p>}
 
         <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
           placeholder="Description"
-          required
+          {...register('description', { required: 'Description is required' })}
         />
+        {errors.description && (
+          <p className="error">{errors.description.message}</p>
+        )}
 
         <select
-          name="material"
-          value={formData.material}
-          onChange={handleInputChange}
-          required>
+          {...register('material', { required: 'Please select a material' })}
+        >
           <option value="">Select Material</option>
           <option value="COTTON">Cotton</option>
           <option value="POLYESTER">Polyester</option>
@@ -103,12 +73,11 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
           <option value="SATIN">Satin</option>
           <option value="VELVET">Velvet</option>
         </select>
+        {errors.material && <p className="error">{errors.material.message}</p>}
 
         <select
-          name="color"
-          value={formData.color}
-          onChange={handleInputChange}
-          required>
+          {...register('color', { required: 'Please select a color' })}
+        >
           <option value="">Select Color</option>
           <option value="RED">Red</option>
           <option value="BLUE">Blue</option>
@@ -122,40 +91,49 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
           <option value="BROWN">Brown</option>
           <option value="GREY">Grey</option>
         </select>
+        {errors.color && <p className="error">{errors.color.message}</p>}
 
         <input
           type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleInputChange}
           placeholder="Price"
-          required
+          {...register('price', {
+            required: 'Price is required',
+            validate: (value) =>
+              value > 0 || 'Price must be greater than 0',
+          })}
         />
+        {errors.price && <p className="error">{errors.price.message}</p>}
 
         <input
           type="number"
-          name="stock"
-          value={formData.stock}
-          onChange={handleInputChange}
           placeholder="Stock"
-          required
+          {...register('stock', {
+            required: 'Stock is required',
+            validate: (value) =>
+              value >= 0 || 'Stock must be zero or greater',
+          })}
         />
+        {errors.stock && <p className="error">{errors.stock.message}</p>}
 
         <input
           type="text"
-          name="pictureUrl"
-          value={formData.pictureUrl}
-          onChange={handleInputChange}
           placeholder="Picture URL (optional)"
+          {...register('pictureUrl', {
+            pattern: {
+              value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|svg|gif))?$/,
+              message: 'Please enter a valid image URL',
+            },
+          })}
         />
+        {errors.pictureUrl && (
+          <p className="error">{errors.pictureUrl.message}</p>
+        )}
 
         <div className="checkbox-group">
           <label>
             <input
               type="checkbox"
-              name="washable"
-              checked={formData.washable}
-              onChange={handleInputChange}
+              {...register('washable')}
             />
             Washable
           </label>
@@ -165,9 +143,7 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
           <label>
             <input
               type="checkbox"
-              name="ironed"
-              checked={formData.ironed}
-              onChange={handleInputChange}
+              {...register('ironed')}
             />
             Ironed
           </label>
