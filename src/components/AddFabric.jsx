@@ -1,45 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import './AddFabric.css';
 
 const AddFabric = ({ onAdd, onClose }) => {
-  const [name, setName] = useState('');
-  const [color, setColor] = useState('');
-  const [material, setMaterial] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [washable, setWashable] = useState(false);
-  const [ironed, setIroned] = useState(false);
-  const [stock, setStock] = useState('');
-  const [pictureUrl, setPictureUrl] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (isNaN(price) || price <= 0) {
-      alert('Please enter a valid price.');
-      return;
-    }
-
-    if (isNaN(stock) || stock < 0) {
-      alert('Please enter a valid stock quantity.');
-      return;
-    }
-
-    if (pictureUrl && !/^https?:\/\/.*\.(png|jpg|jpeg|svg|gif)$/.test(pictureUrl)) {
-      alert('Please enter a valid image URL.');
-      return;
-    }
-
+  const onSubmit = (data) => {
     const newFabric = {
-      name,
-      description,
-      material,
-      color,
-      price: parseFloat(price),
-      washable,
-      ironed,
-      stock: parseInt(stock, 10),
-      pictureUrl,
+      ...data,
+      price: parseFloat(data.price),
+      stock: parseInt(data.stock, 10),
+      washable: data.washable || false,
+      ironed: data.ironed || false,
     };
 
     onAdd(newFabric);
@@ -49,80 +25,98 @@ const AddFabric = ({ onAdd, onClose }) => {
   return (
     <div className="add-product-form">
       <h3>Add Fabric</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
           placeholder="Name"
-          required
+          {...register('name', { required: 'Name is required' })}
         />
+        {errors.name && <p className="error">{errors.name.message}</p>}
 
         <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
-          required
+          {...register('description', { required: 'Description is required' })}
         />
+        {errors.description && <p className="error">{errors.description.message}</p>}
 
-        <select value={material} onChange={(e) => setMaterial(e.target.value)} required>
-          <option value="">Select Material</option>
-          <option value="COTTON">Cotton</option>
-          <option value="POLYESTER">Polyester</option>
-          <option value="SILK">Silk</option>
-          <option value="WOOL">Wool</option>
-          <option value="LINEN">Linen</option>
-          <option value="LEATHER">Leather</option>
-          <option value="DENIM">Denim</option>
-          <option value="NYLON">Nylon</option>
-          <option value="SATIN">Satin</option>
-          <option value="VELVET">Velvet</option>
-        </select>
+        <div className="form-row">
+          <select
+            {...register('material', { required: 'Please select a material' })}
+          >
+            <option value="">Select Material</option>
+            <option value="COTTON">Cotton</option>
+            <option value="POLYESTER">Polyester</option>
+            <option value="SILK">Silk</option>
+            <option value="WOOL">Wool</option>
+            <option value="LINEN">Linen</option>
+            <option value="LEATHER">Leather</option>
+            <option value="DENIM">Denim</option>
+            <option value="NYLON">Nylon</option>
+            <option value="SATIN">Satin</option>
+            <option value="VELVET">Velvet</option>
+          </select>
+          {errors.material && <p className="error">{errors.material.message}</p>}
 
-        <select value={color} onChange={(e) => setColor(e.target.value)} required>
-          <option value="">Select Color</option>
-          <option value="RED">Red</option>
-          <option value="BLUE">Blue</option>
-          <option value="GREEN">Green</option>
-          <option value="BLACK">Black</option>
-          <option value="WHITE">White</option>
-          <option value="YELLOW">Yellow</option>
-          <option value="ORANGE">Orange</option>
-          <option value="PURPLE">Purple</option>
-          <option value="PINK">Pink</option>
-          <option value="BROWN">Brown</option>
-          <option value="GREY">Grey</option>
-        </select>
+          <select
+            {...register('color', { required: 'Please select a color' })}
+          >
+            <option value="">Select Color</option>
+            <option value="RED">Red</option>
+            <option value="BLUE">Blue</option>
+            <option value="GREEN">Green</option>
+            <option value="BLACK">Black</option>
+            <option value="WHITE">White</option>
+            <option value="YELLOW">Yellow</option>
+            <option value="ORANGE">Orange</option>
+            <option value="PURPLE">Purple</option>
+            <option value="PINK">Pink</option>
+            <option value="BROWN">Brown</option>
+            <option value="GREY">Grey</option>
+          </select>
+          {errors.color && <p className="error">{errors.color.message}</p>}
+        </div>
 
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="Price"
-          required
-        />
+        <div className="form-row">
+          <input
+            type="number"
+            placeholder="Price"
+            {...register('price', {
+              required: 'Price is required',
+              validate: (value) =>
+                value > 0 ? true : 'Price must be greater than 0',
+            })}
+          />
+          {errors.price && <p className="error">{errors.price.message}</p>}
 
-        <input
-          type="number"
-          value={stock}
-          onChange={(e) => setStock(e.target.value)}
-          placeholder="Stock Quantity"
-          required
-        />
+          <input
+            type="number"
+            placeholder="Stock Quantity"
+            {...register('stock', {
+              required: 'Stock quantity is required',
+              validate: (value) =>
+                value >= 0 ? true : 'Stock must be zero or greater',
+            })}
+          />
+          {errors.stock && <p className="error">{errors.stock.message}</p>}
+        </div>
 
         <input
           type="text"
-          value={pictureUrl}
-          onChange={(e) => setPictureUrl(e.target.value)}
           placeholder="Picture URL (optional)"
+          {...register('pictureUrl', {
+            pattern: {
+              value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|svg|gif))?$/,
+              message: 'Please enter a valid image URL',
+            },
+          })}
         />
+        {errors.pictureUrl && <p className="error">{errors.pictureUrl.message}</p>}
 
         <div className="checkbox-container">
           <label>
             <input
               type="checkbox"
-              checked={washable}
-              onChange={(e) => setWashable(e.target.checked)}
+              {...register('washable')}
             />
             Washable
           </label>
@@ -130,15 +124,16 @@ const AddFabric = ({ onAdd, onClose }) => {
           <label>
             <input
               type="checkbox"
-              checked={ironed}
-              onChange={(e) => setIroned(e.target.checked)}
+              {...register('ironed')}
             />
             Ironed
           </label>
         </div>
 
-        <button type="submit">Add</button>
-        <button type="button" onClick={onClose}>Cancel</button>
+        <div className="button-row">
+          <button type="submit">Add</button>
+          <button type="button" onClick={onClose}>Cancel</button>
+        </div>
       </form>
     </div>
   );

@@ -7,82 +7,128 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 20px 0;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 1200px;
 }
-
+  
 .add-product-form h3 {
     margin-bottom: 15px;
+    margin-top: -5px;
     font-size: 24px;
     color: #333;
 }
-
+  
 .add-product-form form {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-
+  
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+  
+.form-row input,
+.form-row select {
+    flex: 1;
+}
+  
 .add-product-form input,
 .add-product-form textarea,
 .add-product-form select {
-    margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+  
+.add-product-form input:focus,
+.add-product-form textarea:focus,
+.add-product-form select:focus {
+    border-color: #500153;
+    outline: none;
+}
+  
+.add-product-form .checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
 }
 
 .add-product-form input[type="checkbox"] {
-    margin-right: 10px;
-    width: auto;
+    margin-right: 8px;
     transform: scale(1.2);
+    cursor: pointer;
+    accent-color: #500153;
 }
 
-.add-product-form .checkbox-container {
+.add-product-form label {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    color: #333;
-    font-size: 16px;
+    gap: 8px;
+    cursor: pointer;
 }
-
-.add-product-form input:focus,
-.add-product-form textarea:focus, 
-.add-product-form select:focus {
-    border-color: #007bff;
-    outline: none;
+  
+.add-product-form .button-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
 }
-
+  
 .add-product-form button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 100%;
-    margin-top: 10px; 
+    flex: 1;
 }
-
+  
 .add-product-form button[type="submit"] {
-    background-color: #28a745;
+    background-color: #1f9914;
     color: white;
 }
-
+  
 .add-product-form button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #237234;
 }
-
+  
 .add-product-form button[type="button"] {
-    background-color: #dc3545; 
+    background-color: #911e0e;
     color: white;
 }
-
+  
 .add-product-form button[type="button"]:hover {
-    background-color: #c82333; 
+    background-color: #741c10;
+}
+  
+.add-product-form textarea {
+    resize: vertical;
+    min-height: 80px;
 }
 
-.add-product-form textarea {
-    resize: vertical; 
-    min-height: 80px; 
+/* error */
+
+.add-product-form .error {
+    font-size: 15px;
+    color: #d9534f;
+    margin: -40px;
+    display: block;
+    text-align: center; 
+}
+
+.error::before {
+    content: "⚠ ";
+    font-weight: bold;
 }
