@@ -10,6 +10,7 @@ const AddFabric = ({ onAdd, onClose }) => {
   const [washable, setWashable] = useState(false);
   const [ironed, setIroned] = useState(false);
   const [stock, setStock] = useState('');
+  const [pictureUrl, setPictureUrl] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +25,12 @@ const AddFabric = ({ onAdd, onClose }) => {
       return;
     }
 
-    const newProduct = {
+    if (pictureUrl && !/^https?:\/\/.*\.(png|jpg|jpeg|svg|gif)$/.test(pictureUrl)) {
+      alert('Please enter a valid image URL.');
+      return;
+    }
+
+    const newFabric = {
       name,
       description,
       material,
@@ -33,9 +39,10 @@ const AddFabric = ({ onAdd, onClose }) => {
       washable,
       ironed,
       stock: parseInt(stock, 10),
+      pictureUrl,
     };
-    
-    onAdd(newProduct);
+
+    onAdd(newFabric);
     onClose();
   };
 
@@ -43,7 +50,6 @@ const AddFabric = ({ onAdd, onClose }) => {
     <div className="add-product-form">
       <h3>Add Fabric</h3>
       <form onSubmit={handleSubmit}>
-        
         <input
           type="text"
           value={name}
@@ -104,6 +110,13 @@ const AddFabric = ({ onAdd, onClose }) => {
           required
         />
 
+        <input
+          type="text"
+          value={pictureUrl}
+          onChange={(e) => setPictureUrl(e.target.value)}
+          placeholder="Picture URL (optional)"
+        />
+
         <div className="checkbox-container">
           <label>
             <input
@@ -126,7 +139,6 @@ const AddFabric = ({ onAdd, onClose }) => {
 
         <button type="submit">Add</button>
         <button type="button" onClick={onClose}>Cancel</button>
-        
       </form>
     </div>
   );

@@ -42,8 +42,8 @@ const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
   return (
     <div className="product-admin-item">
       <div className="product-image">
-        {product.imageUrl ? (
-          <img src={product.imageUrl} alt={product.name} />
+        {product.pictureUrl ? (
+          <img src={product.pictureUrl} alt={product.name} />
         ) : (
           placeholderImage
         )}

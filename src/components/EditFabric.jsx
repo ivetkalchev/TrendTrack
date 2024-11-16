@@ -10,7 +10,8 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
     price: product.price,
     washable: product.washable,
     ironed: product.ironed,
-    stock: product.stock
+    stock: product.stock,
+    pictureUrl: product.pictureUrl || ''
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -29,27 +30,35 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (isNaN(formData.price) || formData.price <= 0) {
       alert('Please enter a valid price.');
       return;
     }
-  
+
     if (isNaN(formData.stock) || formData.stock < 0) {
       alert('Please enter a valid stock quantity.');
       return;
     }
-  
+
+    if (
+      formData.pictureUrl &&
+      !/^(https?:\/\/.*\.(?:png|jpg|jpeg|svg|gif))$/.test(formData.pictureUrl)
+    ) {
+      alert('Please enter a valid image URL (e.g., http://example.com/image.jpg).');
+      return;
+    }
+
     const updatedProduct = {
       ...product,
       ...formData,
       price: parseFloat(formData.price),
-      stock: parseInt(formData.stock, 10)
+      stock: parseInt(formData.stock, 10),
     };
-  
+
     onUpdate(updatedProduct);
     onClose();
-  };  
+  };
 
   const handleCancel = () => {
     setFormData(initialFormData);
@@ -132,6 +141,14 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
           required
         />
 
+        <input
+          type="text"
+          name="pictureUrl"
+          value={formData.pictureUrl}
+          onChange={handleInputChange}
+          placeholder="Picture URL (optional)"
+        />
+
         <div className="checkbox-group">
           <label>
             <input
@@ -158,7 +175,6 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
 
         <button type="submit">Update</button>
         <button type="button" onClick={handleCancel}>Cancel</button>
-
       </form>
     </div>
   );
