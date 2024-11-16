@@ -79,11 +79,12 @@ const AddFabric = ({ onAdd, onClose }) => {
         <div className="form-row">
           <input
             type="number"
+            step="0.01"
             placeholder="Price"
             {...register('price', {
               required: 'Price is required',
               validate: (value) =>
-                value > 0 ? true : 'Price must be greater than 0',
+                value > 0 || 'Price must be greater than 0',
             })}
           />
           {errors.price && <p className="error">{errors.price.message}</p>}

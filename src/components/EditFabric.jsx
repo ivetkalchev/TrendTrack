@@ -95,6 +95,7 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
 
         <input
           type="number"
+          step="0.01"
           placeholder="Price"
           {...register('price', {
             required: 'Price is required',
