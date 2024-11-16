@@ -15,7 +15,8 @@
   text-align: center;
   color: #4A334C;
   font-size: 28px;
-  padding: 50px;
+  padding: 120px;
+  margin: 40px;
 }
 
 .add-product-button {
@@ -30,7 +31,6 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-bottom: 30px;
 }
 
 .add-product-button:hover {
@@ -51,4 +51,29 @@ h2 {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.filter-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  width: 250px;
+}
+
+.filter-input:focus {
+  border-color: #4A334C;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+#no-result {
+  padding: 112px;
+  text-align: center;
+  color: #d9534f;
 }
