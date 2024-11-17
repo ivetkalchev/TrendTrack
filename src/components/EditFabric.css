@@ -23,7 +23,7 @@
 }
 
 .edit-product-form input {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -32,7 +32,7 @@
 }
 
 .edit-product-form select {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -53,7 +53,7 @@
   cursor: pointer;
   font-size: 16px;
   width: 100%;
-  margin-top: 10px; 
+  margin-top: 5px; 
 }
 
 .edit-product-form button[type="submit"] {
@@ -75,7 +75,7 @@
 }
 
 .edit-product-form textarea {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -93,13 +93,15 @@
 .checkbox-group {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  margin-top: 6px;
 }
 
 .checkbox-group label {
   font-size: 16px;
   margin-left: 10px;
   color: #333;
+  gap: 10px;
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -132,11 +134,15 @@
 .edit-product-form .error {
   font-size: 14px;
   color: #d9534f;
-  margin: -40px;
   text-align: left;
+  margin: -115px -115px -115px;
+  line-height: 1.2;
+  display: inline-block; 
+  width: 100%;
 }
 
 .error::before {
   content: "⚠ ";
-  font-weight: bold;
+  color: #d9534f;
+  margin-right: 5px;
 }

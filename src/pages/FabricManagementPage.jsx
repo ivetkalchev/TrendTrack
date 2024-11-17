@@ -3,7 +3,7 @@ import { getFabrics, addFabric, updateFabric, deleteFabric } from '../services/f
 import ProductAdmin from '../components/FabricControlPanel';
 import AddProduct from '../components/AddFabric';
 import './FabricManagementPage.css';
-import { FaPlus, FaSearch } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 
 const ProductManagementPage = () => {
   const [fabrics, setFabrics] = useState([]);

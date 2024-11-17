@@ -10,10 +10,13 @@ const Header = () => {
       </Link>
       <nav>
         <Link to="/fabric-management">Fabric Managment</Link>
+        <Link to="/user-management">User Managment</Link>
+        <Link to="/orders">Orders</Link>
+        <Link to="/statistics">Statistics</Link>
         <Link to="/catalogue">Catalogue</Link>
         <Link to="/cart">Cart</Link>
       </nav>
-      <Link to="/login" className="login-button">Login</Link>
+      <Link to="/authentication" className="login-button">Login</Link>
     </header>
   );
 };
