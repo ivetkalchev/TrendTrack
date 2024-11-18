@@ -10,7 +10,7 @@ const Register = () => {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <h2>Join Us</h2>
+      <h2>Join Our Family</h2>
       <div className="form-control">
         <label>First Name</label>
         {errors.firstName && <span className="error-message">{errors.firstName.message}</span>}

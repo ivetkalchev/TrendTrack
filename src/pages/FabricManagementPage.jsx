@@ -4,6 +4,8 @@ import ProductAdmin from '../components/FabricControlPanel';
 import AddProduct from '../components/AddFabric';
 import './FabricManagementPage.css';
 import { FaPlus } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const ProductManagementPage = () => {
   const [fabrics, setFabrics] = useState([]);
@@ -66,7 +68,13 @@ const ProductManagementPage = () => {
     )
   );
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading)
+    return (
+      <div className="loading">
+        <FontAwesomeIcon icon={faSpinner} spinPulse />
+      </div>
+    );
+
   if (error) return <div className="error">{error}</div>;
 
   return (
