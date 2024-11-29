@@ -9,7 +9,7 @@ const HomePage = () => {
     <div className="home-container">
       <section className="hero-section">
         <h1>A Vibrant Form of Self Expression</h1>
-        <p>(scroll)</p>
+        <p>(click)</p>
         <a href="#about" className="scroll-icon">
           <img src={mouseIcon} alt="Scroll Icon" />
         </a>

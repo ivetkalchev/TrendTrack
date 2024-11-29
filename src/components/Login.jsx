@@ -1,11 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { login } from "../services/authService";
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Login Data:", data);
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      const response = await login(data);
+      console.log("Login Successful:", response);
+      localStorage.setItem("accessToken", response.accessToken);
+      alert("Login Successful!");
+    } catch (error) {
+      console.error("Login Failed:", error.message);
+      alert("Login Failed. Please try again.");
+    }
   };
 
   return (
