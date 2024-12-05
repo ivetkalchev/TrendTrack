@@ -67,7 +67,7 @@ nav a:hover::after {
   width: 100%;
 }
 
-.login-button {
+.login-button, .logout-button {
   text-decoration: none;
   color: #555;
   font-size: 18px;
@@ -78,9 +78,17 @@ nav a:hover::after {
   padding: 2px;
 }
 
-.login-button:hover {
+.login-button:hover, .logout-button:hover {
   color: #4A334C;
   border: 1px solid #4A334C;
   transform: scale(1.05);
+}
+
+.login-button:hover {
   background-color: #efefef;
+}
+
+.logout-button:hover {
+  background-color: #812b2b;
+  color: white;
 }
