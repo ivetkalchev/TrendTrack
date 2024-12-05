@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FabricControlPanel.css';
 import EditProductForm from './EditFabric';
-import { FaEdit, FaTrash, FaImage } from 'react-icons/fa'; // Import FaImage for placeholder
+import { FaEdit, FaTrash, FaImage } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const FabricControlPanel = ({ product, onDelete, onUpdate }) => {

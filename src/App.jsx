@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import FabricManagementPage from './pages/FabricManagementPage';
 import AuthenticationPage from './pages/AuthenticationPage';
+import UserManagementPage from './pages/UserManagementPage';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={ <HomePage />} />
         <Route path="/fabric-management" element={ <FabricManagementPage />} />
         <Route path="/authentication" element={ <AuthenticationPage />} />
+        <Route path="/user-management" element={ <UserManagementPage />} />
       </Routes>
       <Footer />
     </Router>
