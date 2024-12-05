@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getFabrics, addFabric, updateFabric, deleteFabric } from '../services/fabricService';
-import ProductAdmin from '../components/FabricControlPanel';
-import AddProduct from '../components/AddFabric';
+import FabricControlPanel from '../components/FabricControlPanel';
+import AddFabric from '../components/AddFabric';
 import './FabricManagementPage.css';
 import { FaPlus } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import TokenManager from '../services/tokenManager';
 
-const ProductManagementPage = () => {
+const FabricManagementPage = () => {
   const [fabrics, setFabrics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,7 +49,8 @@ const ProductManagementPage = () => {
   const handleDelete = async (id) => {
     setError(null);
     try {
-      await deleteFabric(id);
+      const token = TokenManager.getAccessToken();
+      await deleteFabric(id, token);
       setFabrics((prevFabrics) => prevFabrics.filter((fabric) => fabric.id !== id));
       setFeedbackMessage('Fabric deleted successfully!');
       setTimeout(() => setFeedbackMessage(''), 3000);
@@ -61,10 +63,14 @@ const ProductManagementPage = () => {
     setError(null);
     try {
       await updateFabric(updatedFabric);
-      fetchFabrics();
+      setFabrics((prevFabrics) =>
+        prevFabrics.map((fabric) =>
+          fabric.id === updatedFabric.id ? updatedFabric : fabric
+        )
+      );
       setFeedbackMessage('Fabric updated successfully!');
       setTimeout(() => setFeedbackMessage(''), 3000);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to update fabric. Please try again.');
     }
   };
@@ -105,7 +111,7 @@ const ProductManagementPage = () => {
       {feedbackMessage && <div className="feedback-message">{feedbackMessage}</div>}
 
       {isAdding && (
-        <AddProduct
+        <AddFabric
           onAdd={handleAdd}
           onClose={() => setIsAdding(false)}
         />
@@ -116,7 +122,7 @@ const ProductManagementPage = () => {
       ) : (
         <div className="product-list">
           {filteredFabrics.map((fabric) => (
-            <ProductAdmin
+            <FabricControlPanel
               key={`${fabric.id}`}
               product={fabric}
               onDelete={handleDelete}
@@ -129,4 +135,4 @@ const ProductManagementPage = () => {
   );
 };
 
-export default ProductManagementPage;
+export default FabricManagementPage;

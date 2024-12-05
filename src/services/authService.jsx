@@ -10,7 +10,7 @@ export const login = async (credentials) => {
         withCredentials: true,
       }
     );
-    return response.data;
+    return response.data;c
   } catch (error) {
     throw new Error(`Failed to login: ${error.message}`);
   }
