@@ -3,13 +3,16 @@ import BASE_URL from "./config";
 
 export const login = async (credentials) => {
   try {
-    const response = await axios.post(`${BASE_URL}/tokens/login`, credentials, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/tokens/login`, credentials,
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
-    throw new Error(`Failed to login: ${error.response?.data?.message || error.message}`);
+    throw new Error(`Failed to login: ${error.message}`);
   }
 };
 
