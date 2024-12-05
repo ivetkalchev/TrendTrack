@@ -1,28 +1,25 @@
-const BASE_URL = "http://localhost:8080";
 import axios from "axios";
-  
+import BASE_URL from "./config";
+
 export const login = async (credentials) => {
-  const response = await axios({method: "post", url: `${BASE_URL}/tokens/login`, data:credentials});
-
-  if (!response.ok) {
-    throw new Error("Failed to login");
+  try {
+    const response = await axios.post(`${BASE_URL}/tokens/login`, credentials, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to login: ${error.response?.data?.message || error.message}`);
   }
-
-  return response.json();
 };
 
 export const register = async (userData) => {
-  const response = await fetch(`${BASE_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to register");
+  try {
+    const response = await axios.post(`${BASE_URL}/users`, userData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to register: ${error.message}`);
   }
-
-  return response.json();
 };

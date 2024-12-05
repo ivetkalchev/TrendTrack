@@ -1,16 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../services/authService";
+import TokenManager from "../services/tokenManager";
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
       const response = await login(data);
+      TokenManager.setAccessToken(response.accessToken); // Save token and claims
       console.log("Login Successful:", response);
-      localStorage.setItem("accessToken", response.accessToken);
       alert("Login Successful!");
     } catch (error) {
       console.error("Login Failed:", error.message);

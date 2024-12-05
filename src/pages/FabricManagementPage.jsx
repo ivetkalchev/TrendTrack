@@ -11,6 +11,7 @@ const ProductManagementPage = () => {
   const [fabrics, setFabrics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const [filterQuery, setFilterQuery] = useState('');
 
@@ -37,6 +38,8 @@ const ProductManagementPage = () => {
     try {
       const addedFabric = await addFabric(newFabric);
       setFabrics((prevFabrics) => [...prevFabrics, addedFabric]);
+      setFeedbackMessage('Fabric added successfully!');
+      setTimeout(() => setFeedbackMessage(''), 3000);
     } catch (err) {
       setError('Failed to add fabric. Please try again.');
     }
@@ -47,6 +50,8 @@ const ProductManagementPage = () => {
     try {
       await deleteFabric(id);
       setFabrics((prevFabrics) => prevFabrics.filter((fabric) => fabric.id !== id));
+      setFeedbackMessage('Fabric deleted successfully!');
+      setTimeout(() => setFeedbackMessage(''), 3000);
     } catch (err) {
       setError('Failed to delete fabric. Please try again.');
     }
@@ -57,6 +62,8 @@ const ProductManagementPage = () => {
     try {
       await updateFabric(updatedFabric);
       fetchFabrics();
+      setFeedbackMessage('Fabric updated successfully!');
+      setTimeout(() => setFeedbackMessage(''), 3000);
     } catch (err) {
       setError('Failed to update fabric. Please try again.');
     }
@@ -94,6 +101,8 @@ const ProductManagementPage = () => {
           </button>
         </div>
       </div>
+
+      {feedbackMessage && <div className="feedback-message">{feedbackMessage}</div>}
 
       {isAdding && (
         <AddProduct

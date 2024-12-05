@@ -20,22 +20,6 @@ const Register = () => {
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <h2>Join Our Family</h2>
       <div className="form-control">
-        <label>First Name</label>
-        {errors.firstName && <span className="error-message">{errors.firstName.message}</span>}
-        <input
-          {...register("firstName", { required: "First name is required" })}
-          placeholder="Enter your first name"
-        />
-      </div>
-      <div className="form-control">
-        <label>Last Name</label>
-        {errors.lastName && <span className="error-message">{errors.lastName.message}</span>}
-        <input
-          {...register("lastName", { required: "Last name is required" })}
-          placeholder="Enter your last name"
-        />
-      </div>
-      <div className="form-control">
         <label>Username</label>
         {errors.username && <span className="error-message">{errors.username.message}</span>}
         <input
@@ -73,46 +57,20 @@ const Register = () => {
         />
       </div>
       <div className="form-control">
-        <label>Phone Number</label>
-        {errors.number && <span className="error-message">{errors.number.message}</span>}
+        <label>First Name</label>
+        {errors.firstName && <span className="error-message">{errors.firstName.message}</span>}
         <input
-          type="tel"
-          {...register("number", { required: "Phone number is required" })}
-          placeholder="Enter your phone number"
+          {...register("firstName", { required: "First name is required" })}
+          placeholder="Enter your first name"
         />
       </div>
       <div className="form-control">
-        <label>Address</label>
-        {errors.address && <span className="error-message">{errors.address.message}</span>}
+        <label>Last Name</label>
+        {errors.lastName && <span className="error-message">{errors.lastName.message}</span>}
         <input
-          {...register("address", { required: "Address is required" })}
-          placeholder="Enter your address"
+          {...register("lastName", { required: "Last name is required" })}
+          placeholder="Enter your last name"
         />
-      </div>
-      <div className="form-control">
-        <label>Postal Code</label>
-        {errors.postalCode && <span className="error-message">{errors.postalCode.message}</span>}
-        <input
-          {...register("postalCode", { required: "Postal code is required" })}
-          placeholder="Enter your postal code"
-        />
-      </div>
-      <div className="form-control">
-        <label>Country</label>
-        {errors.country && <span className="error-message">{errors.country.message}</span>}
-        <input
-          {...register("country", { required: "Country is required" })}
-          placeholder="Enter your country"
-        />
-      </div>
-      <div className="form-control">
-        <label>Role</label>
-        {errors.role && <span className="error-message">{errors.role.message}</span>}
-        <select {...register("role", { required: "Role is required" })}>
-          <option value="">Select a role</option>
-          <option value="CLIENT">Client</option>
-          <option value="EMPLOYEE">Employee</option>
-        </select>
       </div>
       <button type="submit" className="submit-btn">Register</button>
     </form>
