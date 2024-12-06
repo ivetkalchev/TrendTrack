@@ -3,7 +3,7 @@ import { getAllUsers, deleteUser, promoteToAdmin } from "../services/userService
 import "./UserManagementPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FaEdit, FaTrash, FaUserShield } from "react-icons/fa";
+import { FaTrash, FaUserShield } from "react-icons/fa";
 
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
@@ -31,7 +31,7 @@ const UserManagementPage = () => {
       setUsers(users.filter((user) => user.id !== id));
       alert("User deleted successfully.");
     } catch (err) {
-      setError("Failed to delete user.");
+      setError("Failed to delete user. Please check permissions.");
     }
   };
 
@@ -45,7 +45,7 @@ const UserManagementPage = () => {
       );
       alert("User promoted to admin.");
     } catch (err) {
-      setError("Failed to promote user.");
+      setError("Failed to promote user. Please check permissions.");
     }
   };
 
@@ -91,21 +91,12 @@ const UserManagementPage = () => {
                     <FaTrash />
                   </button>
                   <button
-                    className="edit-btn"
-                    onClick={() => alert(`Edit functionality not implemented yet for user ID ${user.id}`)}
-                    title="Edit User"
+                    className="promote-btn"
+                    onClick={() => handlePromote(user.id)}
+                    title="Promote to Admin"
                   >
-                    <FaEdit />
+                    <FaUserShield />
                   </button>
-                  {!(user.roles || []).includes("ADMIN") && (
-                    <button
-                      className="promote-btn"
-                      onClick={() => handlePromote(user.id)}
-                      title="Promote to Admin"
-                    >
-                      <FaUserShield />
-                    </button>
-                  )}
                 </div>
               </td>
             </tr>
