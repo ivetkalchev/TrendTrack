@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllUsers, deleteUser, promoteToAdmin } from "../services/userService";
+import { getAllUsers, deleteUser, promoteToAdmin, fireEmployee } from "../services/userService";
 import "./UserManagementPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FaTrash, FaUserShield } from "react-icons/fa";
+import { FaTrash, FaUserShield, FaUserSlash } from "react-icons/fa";
+import TokenManager from '../services/tokenManager';
 
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
@@ -27,25 +28,37 @@ const UserManagementPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteUser(id);
+      const token = TokenManager.getAccessToken();
+      await deleteUser(id, token);
       setUsers(users.filter((user) => user.id !== id));
       alert("User deleted successfully.");
     } catch (err) {
-      setError("Failed to delete user. Please check permissions.");
+      setError(err.message);
     }
   };
 
   const handlePromote = async (id) => {
     try {
-      await promoteToAdmin(id);
-      setUsers(
-        users.map((user) =>
+      const result = await promoteToAdmin(id);
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
           user.id === id ? { ...user, roles: [...user.roles, "ADMIN"] } : user
         )
       );
-      alert("User promoted to admin.");
+      alert(result.message);
     } catch (err) {
-      setError("Failed to promote user. Please check permissions.");
+      setError(err.message);
+    }
+  };
+
+  const handleFire = async (id) => {
+    try {
+      const token = TokenManager.getAccessToken();
+      const result = await fireEmployee(id, token); // Fire employee service
+      setUsers(users.filter((user) => user.id !== id));
+      alert(result.message || "Employee fired successfully.");
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -96,6 +109,13 @@ const UserManagementPage = () => {
                     title="Promote to Admin"
                   >
                     <FaUserShield />
+                  </button>
+                  <button
+                    className="fire-btn"
+                    onClick={() => handleFire(user.id)}
+                    title="Fire Employee"
+                  >
+                    <FaUserSlash />
                   </button>
                 </div>
               </td>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'; 
+import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa'; 
 import needleIcon from "../assets/img/needle.png";
 
 const Footer = () => {
@@ -21,13 +21,13 @@ const Footer = () => {
             <a href="tel:+000000000">+00 000 0000 000</a>
           </div>
           <div className="footer-social">
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
-            <a href="https://www.twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter">
+            <a href="https://www.twitter.com" aria-label="Twitter">
               <FaTwitter />
             </a>
           </div>

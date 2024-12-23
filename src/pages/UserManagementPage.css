@@ -59,7 +59,7 @@ h1 {
   gap: 8px;
 }
 
-.delete-btn, .edit-btn, .promote-btn {
+.delete-btn, .edit-btn, .promote-btn, .fire-btn {
   margin: 0;
   padding: 10px;
   display: flex;
@@ -88,4 +88,13 @@ h1 {
 
 .promote-btn:hover {
   background-color: #388e3c;
+}
+
+.fire-btn {
+  background-color: #ff4500; 
+  color: white;
+}
+
+.fire-btn:hover {
+  background-color: #d13800;
 }
