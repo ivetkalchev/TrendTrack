@@ -17,6 +17,13 @@ const TokenManager = {
     clear: () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("claims");
+    },
+    getUserIdFromToken: () => {
+        const claims = TokenManager.getClaims();
+        if (claims && claims.userId) {
+            return claims.userId;
+        }
+        return null;
     }
 }
  

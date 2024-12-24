@@ -27,6 +27,7 @@ const Header = () => {
         <Link to="/statistics">Statistics</Link>
         <Link to="/catalogue">Catalogue</Link>
         <Link to="/cart">Cart</Link>
+        <Link to="/my-account">My Account</Link>
       </nav>
       {isLoggedIn ? (
         <button onClick={handleLogout} className="logout-button">

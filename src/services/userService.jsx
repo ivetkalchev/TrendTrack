@@ -1,5 +1,6 @@
 import axios from "axios";
 import BASE_URL from "./config";
+import TokenManager from "../services/tokenManager";
 
 const getToken = () => localStorage.getItem("accessToken");
 
@@ -59,5 +60,24 @@ export const editUser = async (id, user, token) => {
       localStorage.removeItem("accessToken");
     }
     throw new Error(`Failed to edit user: ${error.response?.data?.message || error.message}`);
+  }
+};
+
+export const getUserDetailsById = async (id) => {
+  console.log(`Fetching details for user ID: ${id}`);
+  try {
+    const response = await axios.get(`${BASE_URL}/users/${id}`, {
+      headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
+    });
+    console.log("Fetched User Details:", response.data);
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      alert("Unauthorized. Please log in again.");
+      TokenManager.clear();
+      window.location.href = "/login"; // Redirect to login page
+    }
+    console.error("Error fetching user details:", error);
+    throw new Error(`Failed to fetch user details: ${error.message}`);
   }
 };
