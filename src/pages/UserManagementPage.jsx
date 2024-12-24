@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getAllUsers, deleteUser, promoteToAdmin, fireEmployee } from "../services/userService";
+import { getAllUsers, deleteUser, editUser } from "../services/userService";
 import "./UserManagementPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FaTrash, FaUserShield, FaUserSlash } from "react-icons/fa";
-import TokenManager from '../services/tokenManager';
+import { FaTrash, FaEdit } from "react-icons/fa";
+import TokenManager from "../services/tokenManager";
+import EditUser from "../components/EditUser";
 
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,30 +39,19 @@ const UserManagementPage = () => {
     }
   };
 
-  const handlePromote = async (id) => {
-    try {
-      const result = await promoteToAdmin(id);
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === id ? { ...user, roles: [...user.roles, "ADMIN"] } : user
-        )
-      );
-      alert(result.message);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleFire = async (id) => {
+  const handleSave = async (updatedUser) => {
     try {
       const token = TokenManager.getAccessToken();
-      const result = await fireEmployee(id, token); // Fire employee service
-      setUsers(users.filter((user) => user.id !== id));
-      alert(result.message || "Employee fired successfully.");
+      await editUser(updatedUser.id, updatedUser, token); // Pass updated user
+      setUsers(
+        users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+      );
+      setEditingUser(null);
+      alert("User updated successfully.");
     } catch (err) {
       setError(err.message);
     }
-  };
+  };  
 
   if (loading)
     return (
@@ -74,11 +65,16 @@ const UserManagementPage = () => {
   return (
     <div className="user-management">
       <h1>User Management</h1>
-      {error && <p className="error-message">{error}</p>}
+      {editingUser && (
+        <EditUser
+          user={editingUser}
+          onSave={handleSave}
+          onCancel={() => setEditingUser(null)}
+        />
+      )}
       <table className="user-table">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -89,7 +85,6 @@ const UserManagementPage = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
               <td>{user.username}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
@@ -104,18 +99,11 @@ const UserManagementPage = () => {
                     <FaTrash />
                   </button>
                   <button
-                    className="promote-btn"
-                    onClick={() => handlePromote(user.id)}
-                    title="Promote to Admin"
+                    className="edit-btn"
+                    onClick={() => setEditingUser(user)}
+                    title="Edit User"
                   >
-                    <FaUserShield />
-                  </button>
-                  <button
-                    className="fire-btn"
-                    onClick={() => handleFire(user.id)}
-                    title="Fire Employee"
-                  >
-                    <FaUserSlash />
+                    <FaEdit />
                   </button>
                 </div>
               </td>
