@@ -5,14 +5,56 @@ import TokenManager from "../services/tokenManager";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
-    setIsLoggedIn(!!TokenManager.getAccessToken());
+    const accessToken = TokenManager.getAccessToken();
+    setIsLoggedIn(!!accessToken);
+    if (accessToken) {
+      const claims = TokenManager.getClaims();
+      console.log("Claims:", claims); // Debugging line
+      setRole(claims?.roles?.[0] || null);
+    }
   }, []);
 
   const handleLogout = () => {
     TokenManager.clear();
     setIsLoggedIn(false);
+    setRole(null);
+  };
+
+  const renderLinks = () => {
+    if (!isLoggedIn) {
+      return (
+        <>
+          <Link to="/catalogue">Catalogue</Link>
+        </>
+      );
+    }
+
+    if (role === "ADMIN") {
+      return (
+        <>
+          <Link to="/fabric-management">Fabric Management</Link>
+          <Link to="/user-management">User Management</Link>
+          <Link to="/orders">Orders</Link>
+          <Link to="/statistics">Statistics</Link>
+          <Link to="/my-account">My Account</Link>
+        </>
+      );
+    }
+
+    if (role === "CLIENT") {
+      return (
+        <>
+          <Link to="/catalogue">Catalogue</Link>
+          <Link to="/cart">Cart</Link>
+          <Link to="/my-account">My Account</Link>
+        </>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -20,15 +62,7 @@ const Header = () => {
       <Link to="/" className="header-title">
         <h1>TrendTrack</h1>
       </Link>
-      <nav>
-        <Link to="/fabric-management">Fabric Management</Link>
-        <Link to="/user-management">User Management</Link>
-        <Link to="/orders">Orders</Link>
-        <Link to="/statistics">Statistics</Link>
-        <Link to="/catalogue">Catalogue</Link>
-        <Link to="/cart">Cart</Link>
-        <Link to="/my-account">My Account</Link>
-      </nav>
+      <nav>{renderLinks()}</nav>
       {isLoggedIn ? (
         <button onClick={handleLogout} className="logout-button">
           Logout
