@@ -26,7 +26,6 @@ export const addFabric = async (fabric) => {
   }
 };
 
-
 export const getFabrics = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/fabrics`);
