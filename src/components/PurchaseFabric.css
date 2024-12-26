@@ -31,7 +31,7 @@
     padding-right: 20px;
   }  
 
-  .edit-button {
+  .cart-button {
     background-color: #500153;
     color: white;
     font-weight: bold;
@@ -43,7 +43,7 @@
     transition: all 0.3s ease; 
   }
   
-  .edit-button:hover {
+  .cart-button:hover {
     background-color: #330034;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     color: rgb(231, 231, 231);

@@ -1,21 +1,35 @@
 import React from "react";
 import "./PurchaseFabric.css";
-import { FaImage, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
-
-const placeholderImage = (
-  <div className="placeholder-image">
-    <FaImage size={50} color="#ddd" />
-  </div>
-);
+import { FaImage, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import cartService from "../services/cartService";
 
 const PurchaseFabric = ({ product }) => {
+  const handleAddToCart = async () => {
+    try {
+      const item = {
+        id: product.id,
+        name: product.name,
+        price: product.price, // Include price
+        quantity: 1, // Default quantity
+      };
+      console.log("Adding to cart:", item);
+
+      await cartService.addToCart(product.id, 1);
+      alert("Item added to cart successfully!");
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
+  };
+
   return (
     <div className="product-admin-item">
       <div className="product-image">
         {product.pictureUrl ? (
           <img src={product.pictureUrl} alt={product.name} />
         ) : (
-          placeholderImage
+          <div className="placeholder-image">
+            <FaImage size={50} color="#ddd" />
+          </div>
         )}
       </div>
       <div className="product-header">
@@ -40,9 +54,11 @@ const PurchaseFabric = ({ product }) => {
             <FaTimesCircle size={20} color="red" title="Not Ironed" />
           )}
           <span>Ironed</span>
-            <div className="button-container">
-              <button className="edit-button">Add To Cart</button>
-            </div>
+        </div>
+        <div className="button-container">
+          <button className="cart-button" onClick={handleAddToCart}>
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>
