@@ -64,15 +64,18 @@ const cartService = {
     if (!userId || !token) {
       throw new Error("User is not authenticated.");
     }
-    const response = await axios.delete(`${BASE_URL}/cart/${userId}/remove`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      data: { fabricId }, // DELETE requests require `data` for the body
-    });
+    const response = await axios.delete(
+      `${BASE_URL}/cart/${userId}/remove`,
+      {
+        params: { fabricId }, // Pass as query parameter
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return response.data;
-  },
+  },  
 };
 
 export default cartService;
