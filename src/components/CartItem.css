@@ -88,6 +88,8 @@
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: -80px;
+    margin-right: 10px;
   }
   
   .cart-item-remove-button:hover {

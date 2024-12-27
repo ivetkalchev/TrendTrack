@@ -32,3 +32,39 @@
   .empty-cart-message p {
     margin-bottom: 20px;
   }
+
+  .order-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .order-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .address-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  .proceed-order-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .proceed-order-button:hover {
+    background-color: #45a049;
+  }  
