@@ -21,20 +21,33 @@ const CartPage = () => {
     fetchCart();
   }, []);
 
+  const recalculateTotalCost = (items) => {
+    return items.reduce((total, item) => total + item.totalPrice, 0);
+  };
+
   const handleRemoveItem = async (fabricId) => {
     try {
-      const updatedCart = await cartService.removeFromCart(fabricId);
-      setCart(updatedCart);
+      await cartService.removeFromCart(fabricId);
+      alert("Item removed successfully!");
+      // Update cart state locally after successful deletion and recalculate total
+      setCart((prevCart) => {
+        const updatedItems = prevCart.items.filter((item) => item.fabric.id !== fabricId);
+        return {
+          ...prevCart,
+          items: updatedItems,
+          totalCost: recalculateTotalCost(updatedItems),
+        };
+      });
     } catch (err) {
-      console.error("Error removing item:", err.message); // Log the error
-      setError(err.message);
+      console.error("Error removing item:", err.response?.data || err.message);
+      alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
   };
 
   const handleUpdateQuantity = async (fabricId, quantity) => {
     try {
       const updatedCart = await cartService.updateCartItem(fabricId, quantity);
-      setCart(updatedCart);
+      setCart(updatedCart); // Server already sends updated total cost
     } catch (err) {
       console.error("Error updating item quantity:", err.message); // Log the error
       setError(err.message);
@@ -49,17 +62,25 @@ const CartPage = () => {
     <div className="cart-page">
       <h1>Your Cart</h1>
       {error && <p className="inline-error">There was an error: {error}</p>}
-      <div className="cart-items">
-        {cart.items.map((item) => (
-          <CartItem
-            key={item.fabric.id}
-            item={item}
-            onRemove={handleRemoveItem}
-            onUpdateQuantity={handleUpdateQuantity}
-          />
-        ))}
-      </div>
-      <h2>Total Cost: €{cart.totalCost.toFixed(2)}</h2>
+      {cart.items.length === 0 ? ( // Check if the cart is empty
+        <div className="empty-cart-message">
+          <p>Your cart is empty!</p>
+        </div>
+      ) : (
+        <>
+          <div className="cart-items">
+            {cart.items.map((item) => (
+              <CartItem
+                key={item.fabric.id}
+                item={item}
+                onRemove={handleRemoveItem}
+                onUpdateQuantity={handleUpdateQuantity}
+              />
+            ))}
+          </div>
+          <h2>Total Cost: €{cart.totalCost.toFixed(2)}</h2>
+        </>
+      )}
     </div>
   );
 };

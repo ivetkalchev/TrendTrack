@@ -14,10 +14,11 @@ const PurchaseFabric = ({ product }) => {
       };
       console.log("Adding to cart:", item);
 
-      await cartService.addToCart(product.id, 1);
+      await cartService.addToCart(product.id, 1); // Fixed to align with updated service
       alert("Item added to cart successfully!");
     } catch (err) {
-      alert(`Error: ${err.message}`);
+      console.error("Error adding to cart:", err.response?.data || err.message);
+      alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
   };
 

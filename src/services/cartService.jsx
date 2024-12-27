@@ -26,15 +26,14 @@ const cartService = {
     }
     const response = await axios.post(
       `${BASE_URL}/cart/${userId}/add`,
-      null, // No body required
+      { fabricId, quantity }, // Sending payload as the request body
       {
-        params: { fabricId, quantity },
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }
-    );    
+    );
     return response.data;
   },
 
@@ -46,9 +45,8 @@ const cartService = {
     }
     const response = await axios.put(
       `${BASE_URL}/cart/${userId}/update`,
-      null, // No body is required
+      { fabricId, quantity }, // Sending payload as the request body
       {
-        params: { fabricId, quantity },
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -67,15 +65,15 @@ const cartService = {
     const response = await axios.delete(
       `${BASE_URL}/cart/${userId}/remove`,
       {
-        params: { fabricId }, // Pass as query parameter
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+        params: { fabricId }, // Pass as query parameter
       }
     );
     return response.data;
-  },  
+  },
 };
 
 export default cartService;
