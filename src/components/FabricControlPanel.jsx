@@ -34,7 +34,7 @@ const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
   };
 
   const placeholderImage = (
-    <div className="placeholder-image">
+    <div className="placeholder-control-image">
       <FaImage size={50} color="#ddd" />
     </div>
   );

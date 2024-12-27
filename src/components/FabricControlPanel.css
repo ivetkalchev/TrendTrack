@@ -62,14 +62,14 @@
   position: relative;
 }
 
-.product-image img {
+.placeholder-control-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
-.placeholder-image {
+.placeholder-control-image {
   display: flex;
   align-items: center;
   justify-content: center;
