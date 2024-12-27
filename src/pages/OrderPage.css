@@ -1,0 +1,92 @@
+.order-page {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  h1 {
+    color: #3e1c42;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .inline-error {
+    color: #d9534f;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fdf2f8;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+  }
+  
+  .order-table th,
+  .order-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #0f0000;
+  }
+  
+  .order-table th {
+    color: white;
+    text-transform: uppercase;
+    background-color: #3e1c42;
+  }
+  
+  .order-table tr:nth-child(even) {
+    background-color: #fce4ec;
+  }
+  
+  .order-table ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  
+  .order-table ul li {
+    margin: 5px 0;
+  }
+  
+  select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .delete-btn {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+
+  .no-orders {
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+    margin-top: 20px;
+  }

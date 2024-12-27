@@ -1,29 +1,43 @@
 import React from 'react';
 import './HomePage.css';
+import mouseIcon from "../assets/img/mouse.png";
+import fabricImage from "../assets/img/fabric.png";
+import scissorsIcon from "../assets/img/scissors.png";
 
 const HomePage = () => {
   return (
     <div className="home-container">
-
-      <section className="about-section">
-        <h2>Welcome to TrendTrack!</h2>
-        <p>
-          At <strong>TrendTrack</strong>, we believe that fashion isn’t just about what you wear—it's a vibrant form of 
-          <strong> self-expression</strong>! 🌟 Our carefully curated collections of fabulous fabrics, stunning trims, 
-          and chic accessories are here to spark your creativity and elevate your wardrobe to new heights. 
-        </p>
-        <p>
-          Whether you’re a visionary designer, a crafty seamstress, or simply a fashion enthusiast, <strong>TrendTrack </strong> 
-          has everything you need to turn your dreams into reality. 🎨✨ Let’s create something magical together!
-        </p>
+      <section className="hero-section">
+        <h1>A Vibrant Form of Self Expression</h1>
+        <p>(click)</p>
+        <a href="#about" className="scroll-icon">
+          <img src={mouseIcon} alt="Scroll Icon" />
+        </a>
       </section>
-
-      <section className="gallery-section">
-        <h2>Our Collection</h2>
-        <div className="gallery">
-          <img src="/src/assets/img/purple-fabric.webp" alt="Fashion fabric 1" />
-          <img src="/src/assets/img/white-fabric.webp" alt="Fashion fabric 2" />
-          <img src="/src/assets/img/black-fabric.webp" alt="Fashion fabric 3" />
+      <section id="about" className="about-section">
+        <div className="about-header" >
+          <h2>About Us</h2>
+          <img src={scissorsIcon} alt="Scissors Icon" className="scissors-icon" />
+        </div>
+        <div className="about-content">
+          <div className="about-text">
+            <p>
+              At TrendTrack, we believe that fashion isn’t just about what you wear—it’s a vibrant form of 
+              self-expression!
+            </p>
+            <p>
+              Our carefully curated collections of fabulous fabrics, stunning trims, and chic accessories are here to spark your creativity 
+              and elevate your wardrobe to new heights.
+            </p>
+            <p>
+              Whether you’re a visionary designer, a crafty seamstress, or simply a fashion enthusiast, TrendTrack
+              has everything you need to turn your dreams into reality.
+            </p>
+            <a href="/catalogue" className="browse-button">Browse Catalogue +</a>
+          </div>
+          <div className="about-image">
+            <img src={fabricImage} alt="Fabric" />
+          </div>
         </div>
       </section>
     </div>

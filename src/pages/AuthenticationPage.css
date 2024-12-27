@@ -1,0 +1,87 @@
+.authentication-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #4A334C, #6E3E7A);
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+}
+
+.auth-container {
+  background: #ffffff;
+  padding: 30px 50px 30px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-control input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-control span {
+  position: absolute;
+  right: -3%;
+  top: 10%;
+  transform: translateY(-50%);
+  color: #d83e23;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.form-control span::before {
+  content: "⚠ ";
+}
+
+.submit-btn {
+  background-color: #4A334C;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  width: 40%;
+  align-items: center;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #3e1c42;
+}
+
+.toggle-link {
+  color: #4A334C;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: transform 0.3s ease, font-size 0.3s ease;
+  margin-top: -10px;
+}
+
+.toggle-link:hover {
+  transform: scale(1.05);
+  color: #3e1c42;
+}

@@ -1,0 +1,148 @@
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.edit-product-form h3 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #333;
+}
+
+.edit-product-form form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.edit-product-form input {
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.edit-product-form select {
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%; 
+}
+
+.edit-product-form input:focus,
+.edit-product-form select:focus {
+  border-color: #500153;
+  outline: none;
+}
+
+.edit-product-form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 5px; 
+}
+
+.edit-product-form button[type="submit"] {
+  background-color: #1f9914;
+  color: white;
+}
+
+.edit-product-form button[type="submit"]:hover {
+  background-color: #237234;
+}
+
+.edit-product-form button[type="button"] {
+  background-color: #911e0e;
+  color: white;
+}
+
+.edit-product-form button[type="button"]:hover {
+  background-color: #741c10;
+}
+
+.edit-product-form textarea {
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  height: 80px; 
+  resize: vertical; 
+}
+
+.edit-product-form textarea:focus {
+  border-color: #500153;
+  outline: none;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
+
+.checkbox-group label {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #333;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #500153;
+}
+
+.edit-product-form .checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.edit-product-form input,
+.edit-product-form select,
+.edit-product-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.edit-product-form button {
+  margin-top: 10px;
+}
+
+/* error */
+
+.edit-product-form .error {
+  font-size: 14px;
+  color: #d9534f;
+  text-align: left;
+  margin: -115px -115px -115px;
+  line-height: 1.2;
+  display: inline-block; 
+  width: 100%;
+}
+
+.error::before {
+  content: "⚠ ";
+  color: #d9534f;
+  margin-right: 5px;
+}

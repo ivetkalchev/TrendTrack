@@ -1,0 +1,155 @@
+.add-product-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1160px;
+}
+  
+.add-product-form h3 {
+    margin: 20px;
+    margin-top: -5px;
+    font-size: 24px;
+    color: #333;
+}
+  
+.add-product-form form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+  
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+ 
+  .add-product-form select,
+  .add-product-form input {
+    width: 100%;
+    box-sizing: border-box;
+  }  
+  
+.add-product-form input,
+.add-product-form textarea,
+.add-product-form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+  
+.add-product-form input:focus,
+.add-product-form textarea:focus,
+.add-product-form select:focus {
+    border-color: #500153;
+    outline: none;
+}
+  
+.add-product-form .checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.add-product-form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #500153;
+}
+
+.add-product-form label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-top: 2px;
+}
+  
+.add-product-form .button-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 5px;
+}
+  
+.add-product-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1;
+}
+  
+.add-product-form button[type="submit"] {
+    background-color: #1f9914;
+    color: white;
+}
+  
+.add-product-form button[type="submit"]:hover {
+    background-color: #237234;
+}
+  
+.add-product-form button[type="button"] {
+    background-color: #911e0e;
+    color: white;
+}
+  
+.add-product-form button[type="button"]:hover {
+    background-color: #741c10;
+}
+  
+.add-product-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* error */
+
+.add-product-form .error {
+    font-size: 14px;
+    color: #d9534f;
+    margin-top: -120px;
+    margin-left: -120px;
+    margin-bottom: -120px;
+    text-align: left; 
+}
+
+.error::before {
+  content: "⚠ ";
+}
+
+.error-row {
+  text-align: left;
+  font-size: 14px;
+  color: #d9534f;
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+.error-row::before {
+  content: "⚠ ";
+}
