@@ -50,6 +50,7 @@ const Header = () => {
           <Link to="/catalogue">Catalogue</Link>
           <Link to="/cart">Cart</Link>
           <Link to="/my-account">My Account</Link>
+          <Link to="/my-orders">My Orders</Link>
         </>
       );
     }
