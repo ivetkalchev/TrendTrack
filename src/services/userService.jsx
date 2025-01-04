@@ -4,10 +4,17 @@ import TokenManager from "../services/tokenManager";
 
 const getToken = () => localStorage.getItem("accessToken");
 
-export const getAllUsers = async () => {
+export const getAllUsers = async ({ username, firstName, lastName, page, size }) => {
   try {
     const response = await axios.get(`${BASE_URL}/users`, {
       headers: { Authorization: `Bearer ${getToken()}` },
+      params: { 
+        username, 
+        firstName, 
+        lastName, 
+        page, 
+        size 
+      },
     });
     return response.data;
   } catch (error) {

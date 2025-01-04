@@ -1,0 +1,74 @@
+.user-filter-form {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-filter-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 200px;
+  }
+  
+  .user-filter-form label {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .user-filter-form input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #b79bff;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .user-filter-form select {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #b79bff;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  .user-filter-form input:focus,
+  .user-filter-form select:focus {
+    outline: none;
+    border-color: #9c7de3;
+  }
+  
+  .user-filter-form button {
+    padding: 12px 18px;
+    font-size: 16px;
+    background-color: #9c7de3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 22px;
+    height: 100%;
+    align-self: center;
+  }
+  
+  .user-filter-form button:hover {
+    background-color: #7a5bbb;
+  }
+  
+  .user-filter-form button:focus {
+    outline: none;
+  }  

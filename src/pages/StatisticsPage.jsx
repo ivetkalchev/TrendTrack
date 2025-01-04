@@ -21,12 +21,16 @@ const StatisticsPage = () => {
   const [error, setError] = useState(null);
   const [stats, setStats] = useState(null);
 
+  // Default pagination values
+  const pagination = { page: 0, size: 9 };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Call getAllOrders without parameters, as no filters are needed
         const ordersData = await orderService.getAllOrders({});
-        const usersData = await getAllUsers();
+        
+        const usersData = await getAllUsers({ page: pagination.page, size: pagination.size });
+        
         setOrders(ordersData.orders);
         setUsers(usersData.users);
       } catch (err) {
