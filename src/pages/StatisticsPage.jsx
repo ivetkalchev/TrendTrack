@@ -24,7 +24,8 @@ const StatisticsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const ordersData = await orderService.getAllOrders();
+        // Call getAllOrders without parameters, as no filters are needed
+        const ordersData = await orderService.getAllOrders({});
         const usersData = await getAllUsers();
         setOrders(ordersData.orders);
         setUsers(usersData.users);
@@ -121,7 +122,7 @@ const StatisticsPage = () => {
             />
           </div>
           <div className="stat chart">
-            <h3>Order Status</h3><br></br>
+            <h3>Order Status</h3>
             <Pie
               data={{
                 labels: Object.keys(stats.statusCounts),

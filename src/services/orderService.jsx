@@ -34,7 +34,7 @@ const orderService = {
         status,
         page,
         size,
-        ...filters,  // Spread the filters directly here
+        ...filters,
       },
     });
 
