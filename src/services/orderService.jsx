@@ -17,17 +17,27 @@ const orderService = {
     return response.data;
   },
 
-  getAllOrders: async () => {
+  getAllOrders: async ({ id, orderDate, status, page, size, filters }) => {
     const token = TokenManager.getAccessToken();
     if (!token) {
       throw new Error("User is not authenticated.");
     }
+
     const response = await axios.get(`${BASE_URL}/orders`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+      params: {
+        id,
+        orderDate,
+        status,
+        page,
+        size,
+        ...filters,  // Spread the filters directly here
+      },
     });
+
     return response.data;
   },
 
@@ -88,5 +98,7 @@ const orderService = {
     return response.data;
   },
 };
+
+
 
 export default orderService;

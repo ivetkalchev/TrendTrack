@@ -15,7 +15,7 @@ const FabricManagementPage = () => {
   const [error, setError] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [isAdding, setIsAdding] = useState(false);
-  const [pagination, setPagination] = useState({ page: 0, size: 9 });
+  const [pagination, setPagination] = useState({ page: 0, size: 9, filters: {} });
 
   useEffect(() => {
     fetchFabrics(pagination);
@@ -80,8 +80,8 @@ const FabricManagementPage = () => {
     setPagination((prevState) => ({
       ...prevState,
       filters,
+      page: 0,  // Reset to the first page when filtering
     }));
-    fetchFabrics({ page: pagination.page, size: pagination.size, filters });
   };
 
   const handlePageChange = (newPage) => {
@@ -109,7 +109,7 @@ const FabricManagementPage = () => {
         <div className="actions">
           <FilterFabrics onFilter={handleFilter} />
           <button onClick={() => setIsAdding(true)} className="add-product-button">
-            <FaPlus /> Add Product
+            <FaPlus /> Add Fabric
           </button>
         </div>
       </div>

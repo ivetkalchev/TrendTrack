@@ -9,6 +9,7 @@
     max-width: 800px;
     margin: 0 auto;
     align-items: center; 
+    margin-bottom: 20px;
   }
   
   .filter-form input,

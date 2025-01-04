@@ -43,6 +43,7 @@ const CataloguePage = () => {
     }));
   };
 
+  const hasNextPage = products.length === pagination.size;
 
   if (error) {
     return <div className="error">Error: {error}</div>;

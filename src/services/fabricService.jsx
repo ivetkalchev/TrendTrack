@@ -29,8 +29,17 @@ export const addFabric = async (fabric) => {
 export const getFabrics = async ({ name, material, color, minPrice, maxPrice, page, size }) => {
   try {
     const response = await axios.get(`${BASE_URL}/fabrics`, {
-      params: { name, material, color, minPrice, maxPrice, page, size },
+      params: { 
+        name, 
+        material, 
+        color, 
+        minPrice, 
+        maxPrice, 
+        page, 
+        size 
+      },
     });
+    
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch fabrics: ${error.message}`);

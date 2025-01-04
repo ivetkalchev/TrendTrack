@@ -6,9 +6,9 @@ const FilterFabrics = ({ onFilter }) => {
   const [material, setMaterial] = useState('');
   const [color, setColor] = useState('');
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState(100);
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
+  const [size, setSize] = useState(9);
 
   const handleSubmit = (e) => {
     e.preventDefault();
