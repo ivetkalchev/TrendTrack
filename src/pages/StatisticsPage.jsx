@@ -21,7 +21,6 @@ const StatisticsPage = () => {
   const [error, setError] = useState(null);
   const [stats, setStats] = useState(null);
 
-  // Default pagination values
   const pagination = { page: 0, size: 9 };
 
   useEffect(() => {
