@@ -44,7 +44,7 @@ export const editUser = async (id, user, token) => {
     console.log("Attempting to edit user with ID:", id);
     await axios.put(
       `${BASE_URL}/users/${id}`,
-      user, // Send user object as the request body
+      user, 
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const getUserDetailsById = async (id) => {
     if (error.response && error.response.status === 401) {
       alert("Unauthorized. Please log in again.");
       TokenManager.clear();
-      window.location.href = "/login"; // Redirect to login page
+      window.location.href = "/login";
     }
     console.error("Error fetching user details:", error);
     throw new Error(`Failed to fetch user details: ${error.message}`);

@@ -42,7 +42,7 @@ const UserManagementPage = () => {
   const handleSave = async (updatedUser) => {
     try {
       const token = TokenManager.getAccessToken();
-      await editUser(updatedUser.id, updatedUser, token); // Pass updated user
+      await editUser(updatedUser.id, updatedUser, token);
       setUsers(
         users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
       );

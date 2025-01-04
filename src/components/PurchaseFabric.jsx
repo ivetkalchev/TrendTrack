@@ -9,15 +9,14 @@ const PurchaseFabric = ({ product }) => {
       const item = {
         id: product.id,
         name: product.name,
-        price: product.price, // Include price
-        quantity: 1, // Default quantity
+        price: product.price,
+        quantity: 1,
       };
       console.log("Adding to cart:", item);
 
-      await cartService.addToCart(product.id, 1); // Fixed to align with updated service
+      await cartService.addToCart(product.id, 1);
       alert("Item added to cart successfully!");
     } catch (err) {
-      console.error("Error adding to cart:", err.response?.data || err.message);
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
   };

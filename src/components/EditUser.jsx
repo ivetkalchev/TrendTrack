@@ -17,7 +17,7 @@ const EditUser = ({ user, onSave, onCancel }) => {
   });
 
   const onSubmit = (data) => {
-    onSave({ ...data, id: user.id }); // Pass the updated user object
+    onSave({ ...data, id: user.id });
   };
 
   return (

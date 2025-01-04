@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getFabrics, addFabric, updateFabric, deleteFabric } from '../services/fabricService';
 import FabricControlPanel from '../components/FabricControlPanel';
 import AddFabric from '../components/AddFabric';
+import FilterFabrics from '../components/FilterFabrics';
 import './FabricManagementPage.css';
 import { FaPlus } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,18 +15,18 @@ const FabricManagementPage = () => {
   const [error, setError] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [isAdding, setIsAdding] = useState(false);
-  const [filterQuery, setFilterQuery] = useState('');
+  const [pagination, setPagination] = useState({ page: 0, size: 9 });
 
   useEffect(() => {
-    fetchFabrics();
-  }, []);
+    fetchFabrics(pagination);
+  }, [pagination]);
 
-  const fetchFabrics = async () => {
+  const fetchFabrics = async ({ page, size, filters }) => {
     setLoading(true);
     setError(null);
 
     try {
-      const data = await getFabrics();
+      const data = await getFabrics({ ...filters, page, size });
       setFabrics(data.fabrics);
     } catch (err) {
       setError('Failed to fetch fabrics. Please try again later.');
@@ -75,11 +76,22 @@ const FabricManagementPage = () => {
     }
   };
 
-  const filteredFabrics = fabrics.filter((fabric) =>
-    ['name', 'material', 'color'].some((key) =>
-      fabric[key]?.toLowerCase().includes(filterQuery.toLowerCase())
-    )
-  );
+  const handleFilter = (filters) => {
+    setPagination((prevState) => ({
+      ...prevState,
+      filters,
+    }));
+    fetchFabrics({ page: pagination.page, size: pagination.size, filters });
+  };
+
+  const handlePageChange = (newPage) => {
+    setPagination((prevState) => ({
+      ...prevState,
+      page: newPage,
+    }));
+  };
+
+  const hasNextPage = fabrics.length === pagination.size;
 
   if (loading)
     return (
@@ -92,38 +104,27 @@ const FabricManagementPage = () => {
 
   return (
     <div className="product-management-container">
+      <h2>Fabric Management</h2>
       <div className="header-container">
-        <h2>Fabric Management</h2>
         <div className="actions">
-          <input
-            type="text"
-            placeholder="Search fabrics..."
-            value={filterQuery}
-            onChange={(e) => setFilterQuery(e.target.value)}
-            className="filter-input"
-          />
+          <FilterFabrics onFilter={handleFilter} />
           <button onClick={() => setIsAdding(true)} className="add-product-button">
-            <FaPlus />
+            <FaPlus /> Add Product
           </button>
         </div>
       </div>
 
       {feedbackMessage && <div className="feedback-message">{feedbackMessage}</div>}
 
-      {isAdding && (
-        <AddFabric
-          onAdd={handleAdd}
-          onClose={() => setIsAdding(false)}
-        />
-      )}
+      {isAdding && <AddFabric onAdd={handleAdd} onClose={() => setIsAdding(false)} />}
 
-      {filteredFabrics.length === 0 ? (
+      {fabrics.length === 0 ? (
         <p id="no-result">No results match your search.</p>
       ) : (
         <div className="product-list">
-          {filteredFabrics.map((fabric) => (
+          {fabrics.map((fabric) => (
             <FabricControlPanel
-              key={`${fabric.id}`}
+              key={fabric.id}
               product={fabric}
               onDelete={handleDelete}
               onUpdate={handleUpdate}
@@ -131,6 +132,24 @@ const FabricManagementPage = () => {
           ))}
         </div>
       )}
+
+      <div className="pagination-controls">
+        <button
+          onClick={() => handlePageChange(pagination.page - 1)}
+          disabled={pagination.page === 0}
+        >
+          Previous
+        </button>
+        <span>
+          Page {pagination.page + 1}
+        </span>
+        <button
+          onClick={() => handlePageChange(pagination.page + 1)}
+          disabled={!hasNextPage}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

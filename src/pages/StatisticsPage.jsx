@@ -13,7 +13,6 @@ import orderService from "../services/orderService";
 import { getAllUsers } from "../services/userService";
 import "./StatisticsPage.css";
 
-// Register required components
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
 const StatisticsPage = () => {

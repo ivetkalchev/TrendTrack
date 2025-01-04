@@ -9,11 +9,9 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
-      TokenManager.setAccessToken(response.accessToken); // Save token and claims
-      console.log("Login Successful:", response);
+      TokenManager.setAccessToken(response.accessToken); 
       alert("Login Successful!");
     } catch (error) {
-      console.error("Login Failed:", error.message);
       alert("Login Failed. Please try again.");
     }
   };

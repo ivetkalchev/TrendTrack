@@ -15,7 +15,6 @@ const CartPage = () => {
         const data = await cartService.getCart();
         setCart(data);
       } catch (err) {
-        console.error("Error fetching cart:", err.message); // Log the error
         setError(err.message);
       }
     };
@@ -31,7 +30,6 @@ const CartPage = () => {
     try {
       await cartService.removeFromCart(fabricId);
       alert("Item removed successfully!");
-      // Update cart state locally after successful deletion and recalculate total
       setCart((prevCart) => {
         const updatedItems = prevCart.items.filter((item) => item.fabric.id !== fabricId);
         return {
@@ -49,9 +47,9 @@ const CartPage = () => {
   const handleUpdateQuantity = async (fabricId, quantity) => {
     try {
       const updatedCart = await cartService.updateCartItem(fabricId, quantity);
-      setCart(updatedCart); // Server already sends updated total cost
+      setCart(updatedCart);
     } catch (err) {
-      console.error("Error updating item quantity:", err.message); // Log the error
+      console.error("Error updating item quantity:", err.message);
       setError(err.message);
     }
   };
@@ -64,7 +62,7 @@ const CartPage = () => {
 
     try {
       const orderData = {
-        user: cart.user, // Assuming the cart includes user information
+        user: cart.user,
         items: cart.items.map((item) => ({
           fabric: item.fabric,
           quantity: item.quantity,
@@ -78,7 +76,6 @@ const CartPage = () => {
       await orderService.createOrder(orderData);
       alert("Order placed successfully!");
 
-      // Clear the cart locally
       setCart({ ...cart, items: [], totalCost: 0 });
       setAddress("");
     } catch (err) {
@@ -95,7 +92,7 @@ const CartPage = () => {
     <div className="cart-page">
       <h1>Your Cart</h1>
       {error && <p className="inline-error">There was an error: {error}</p>}
-      {cart.items.length === 0 ? ( // Check if the cart is empty
+      {cart.items.length === 0 ? (
         <div className="empty-cart-message">
           <p>Your cart is empty!</p>
         </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import orderService from "../services/orderService"; // Import the orderService object
-import TokenManager from "../services/tokenManager"; // Import TokenManager for user ID
+import orderService from "../services/orderService";
 import "./UserOrdersPage.css";
 
 const UserOrdersPage = () => {
@@ -10,7 +9,7 @@ const UserOrdersPage = () => {
   useEffect(() => {
     const fetchUserOrders = async () => {
       try {
-        const data = await orderService.getOrdersByUserId(); // Correctly call the method from orderService
+        const data = await orderService.getOrdersByUserId();
         setOrders(data.orders);
       } catch (err) {
         console.error("Error fetching user orders:", err.message);
