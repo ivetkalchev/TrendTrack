@@ -19,16 +19,16 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={ <HomePage />} />
-        <Route path="/fabric-management" element={ <FabricManagementPage />} />
-        <Route path="/authentication" element={ <AuthenticationPage />} />
-        <Route path="/user-management" element={ <UserManagementPage />} />
-        <Route path="/my-account" element={ <PersonalInfoPage />} />
-        <Route path="/catalogue" element={ <CataloguePage />} />
-        <Route path="/cart" element={ <CartPage />} />
-        <Route path="/orders" element={ <OrderPage />} />
-        <Route path="/my-orders" element={ <UserOrdersPage />} />
-        <Route path="/statistics" element={ <StatisticsPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/fabric-management" element={<FabricManagementPage />} />
+        <Route path="/authentication" element={<AuthenticationPage />} />
+        <Route path="/user-management" element={<UserManagementPage />} />
+        <Route path="/my-account" element={<PersonalInfoPage />} />
+        <Route path="/catalogue" element={<CataloguePage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrderPage />} />
+        <Route path="/my-orders" element={<UserOrdersPage />} />
+        <Route path="/statistics" element={<StatisticsPage />} />
       </Routes>
       <Footer />
     </Router>

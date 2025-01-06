@@ -13,9 +13,13 @@ const PurchaseFabric = ({ product }) => {
         quantity: 1,
       };
       console.log("Adding to cart:", item);
-
+  
       await cartService.addToCart(product.id, 1);
       alert("Item added to cart successfully!");
+  
+      if (product.stock <= 5) {
+        alert(`Warning: Only ${product.stock} units left for ${product.name}!`);
+      }
     } catch (err) {
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }

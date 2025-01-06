@@ -28,16 +28,13 @@ export const getAllUsers = async ({ username, firstName, lastName, page, size })
 
 export const deleteUser = async (id) => {
   try {
-    console.log("Attempting to delete user with ID:", id);
     await axios.delete(`${BASE_URL}/users/${id}`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
         "Content-Type": "application/json",
       },
     });
-    console.log("User deleted successfully.");
   } catch (error) {
-    console.error("Error while deleting user:", error.response || error.message);
     if (error.response && error.response.status === 401) {
       alert("Unauthorized. Please log in again.");
       localStorage.removeItem("accessToken");
@@ -48,7 +45,6 @@ export const deleteUser = async (id) => {
 
 export const editUser = async (id, user, token) => {
   try {
-    console.log("Attempting to edit user with ID:", id);
     await axios.put(
       `${BASE_URL}/users/${id}`,
       user, 
@@ -59,7 +55,6 @@ export const editUser = async (id, user, token) => {
         },
       }
     );
-    console.log("User edited successfully.");
   } catch (error) {
     console.error("Error while editing user:", error.response || error.message);
     if (error.response && error.response.status === 401) {
@@ -71,12 +66,10 @@ export const editUser = async (id, user, token) => {
 };
 
 export const getUserDetailsById = async (id) => {
-  console.log(`Fetching details for user ID: ${id}`);
   try {
     const response = await axios.get(`${BASE_URL}/users/${id}`, {
       headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` },
     });
-    console.log("Fetched User Details:", response.data);
     return response.data;
   } catch (error) {
     if (error.response && error.response.status === 401) {
