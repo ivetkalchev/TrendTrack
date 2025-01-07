@@ -1,40 +1,40 @@
-.notification-container {
+.notification {
     position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .notification {
-    background-color: #333;
+    top: 100px;
+    right: 30px;
+    background-color: #500153;
     color: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px 10px 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-width: 250px;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: slideIn 0.5s ease-out;
   }
   
-  .notification span {
-    flex-grow: 1;
-  }
-  
-  .close-button {
+  .notification button {
     background: transparent;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size:20px;
     cursor: pointer;
-    padding: 0;
-    margin-left: 10px;
+    margin-top: 3px;
   }
   
-  .close-button:hover {
-    color: #ff4d4d;
+  .notification button:hover {
+    color: #8a8a8a;
   }
+  
+  @keyframes slideIn {
+    from {
+      right: -300px;
+    }
+    to {
+      right: 20px;
+    }
+  }  

@@ -38,9 +38,9 @@
     font-size: 14px;
     padding: 8px 10px;
     border: none;
-    border-radius: 5px; 
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
   }
   
   .cart-button:hover {
@@ -48,3 +48,35 @@
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     color: rgb(231, 231, 231);
   }
+  
+  .cart-button.disabled,
+  .cart-button:disabled {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .cart-button:disabled {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+    pointer-events: none;
+  }  
+
+  .added-message {
+    color: green;
+    font-size: 14px;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+  }
+  
+  .added-message {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .added-message.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }  

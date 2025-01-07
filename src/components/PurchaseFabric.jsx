@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PurchaseFabric.css";
 import { FaImage, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import cartService from "../services/cartService";
 
 const PurchaseFabric = ({ product }) => {
+  const [addedToCart, setAddedToCart] = useState(false);
+
   const handleAddToCart = async () => {
+    if (product.stock === 0) return;
+
     try {
       const item = {
         id: product.id,
@@ -12,14 +16,11 @@ const PurchaseFabric = ({ product }) => {
         price: product.price,
         quantity: 1,
       };
-      console.log("Adding to cart:", item);
-  
       await cartService.addToCart(product.id, 1);
-      alert("Item added to cart successfully!");
-  
-      if (product.stock <= 5) {
-        alert(`Warning: Only ${product.stock} units left for ${product.name}!`);
-      }
+
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 2000);
+
     } catch (err) {
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
@@ -60,9 +61,14 @@ const PurchaseFabric = ({ product }) => {
           <span>Ironed</span>
         </div>
         <div className="button-container">
-          <button className="cart-button" onClick={handleAddToCart}>
-            Add To Cart
+          <button
+            className={`cart-button ${product.stock === 0 ? 'disabled' : ''}`}
+            onClick={handleAddToCart}
+            disabled={product.stock === 0}
+          >
+            {product.stock === 0 ? 'Sold Out' : 'Add To Cart'}
           </button>
+          {addedToCart && <span className="added-message">Added to cart!</span>}
         </div>
       </div>
     </div>

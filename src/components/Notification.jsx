@@ -1,23 +1,23 @@
-// src/components/Notification.js
-import React, { useEffect, useState } from 'react';
-import './Notification.css'; // Import CSS for styling
+import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
+import './Notification.css';
 
-const Notification = ({ message, onClose }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose();
-    }, 5000); // Auto-close notification after 5 seconds
+const Notification = ({ message }) => {
+  const [isVisible, setIsVisible] = useState(true);
 
-    return () => clearTimeout(timer);
-  }, [message, onClose]);
+  const handleClose = () => {
+    setIsVisible(false);
+  };
 
   return (
-    <div className="notification-container">
+    isVisible && (
       <div className="notification">
-        <span>{message}</span>
-        <button className="close-button" onClick={onClose}>×</button>
+        {message}
+        <button onClick={handleClose}>
+          <FaTimes />
+        </button>
       </div>
-    </div>
+    )
   );
 };
 
