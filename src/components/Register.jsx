@@ -7,8 +7,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await registerUser(data);
-      console.log("Registration Successful:", response);
+      await registerUser(data);
       alert("Registration Successful!");
     } catch (error) {
       console.error("Registration Failed:", error.message);

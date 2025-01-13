@@ -120,7 +120,7 @@ const CartPage = () => {
               className="address-input"
             />
             <button className="proceed-order-button" onClick={handleProceedOrder}>
-              Proceed with Order
+              Proceed with Your Order
             </button>
           </div>
         </>
