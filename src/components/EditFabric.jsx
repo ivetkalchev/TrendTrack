@@ -83,7 +83,7 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
 
         <div className="form-group">
           {errors.color && <p className="error">{errors.color.message}</p>}
-          <select
+          <select id="color-select"
             {...register('color', { required: 'Please select a color' })}
           >
             <option value="">Select Color</option>
@@ -117,9 +117,9 @@ const EditFabric = ({ product, onUpdate, onClose }) => {
 
         <div className="form-group">
           {errors.stock && <p className="error">{errors.stock.message}</p>}
-          <input
+          <input id="stock-quantity"
             type="number"
-            placeholder="Stock"
+            placeholder="Stock Quantity"
             {...register('stock', {
               required: 'Stock is required',
               validate: (value) =>

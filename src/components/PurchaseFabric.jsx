@@ -8,23 +8,16 @@ const PurchaseFabric = ({ product }) => {
 
   const handleAddToCart = async () => {
     if (product.stock === 0) return;
-
+  
     try {
-      const item = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: 1,
-      };
       await cartService.addToCart(product.id, 1);
-
+  
       setAddedToCart(true);
       setTimeout(() => setAddedToCart(false), 2000);
-
     } catch (err) {
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
-  };
+  };  
 
   return (
     <div className="product-admin-item">

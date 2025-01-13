@@ -23,12 +23,12 @@ const AddFabric = ({ onAdd, onClose }) => {
   };
 
   return (
-    <div className="add-product-form">
+    <div className="add-product-form" id="add-fabric-modal">
       <h3>Add Fabric</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           {errors.name && <p className="error">{errors.name.message}</p>}
-          <input
+          <input 
             type="text"
             placeholder="Name"
             {...register('name', { required: 'Name is required' })}
@@ -48,7 +48,7 @@ const AddFabric = ({ onAdd, onClose }) => {
         <div className="form-row">
           <div className="form-group">
             {errors.material && <p className="error-row">{errors.material.message}</p>}
-            <select
+            <select id="material-select"
               {...register('material', { required: 'Please select a material' })}
             >
               <option value="">Select Material</option>
@@ -67,7 +67,7 @@ const AddFabric = ({ onAdd, onClose }) => {
 
           <div className="form-group">
             {errors.color && <p className="error-row">{errors.color.message}</p>}
-            <select
+            <select id="color-select"
               {...register('color', { required: 'Please select a color' })}
             >
               <option value="">Select Color</option>
@@ -148,7 +148,7 @@ const AddFabric = ({ onAdd, onClose }) => {
         </div>
 
         <div className="button-row">
-          <button type="submit">Add</button>
+         <button type="submit" className="add-fabric-submit">Add</button>
           <button type="button" onClick={onClose}>Cancel</button>
         </div>
       </form>

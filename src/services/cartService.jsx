@@ -35,7 +35,7 @@ const cartService = {
       }
     );
     return response.data;
-  },
+  },  
 
   updateCartItem: async (fabricId, quantity) => {
     const token = TokenManager.getAccessToken();
