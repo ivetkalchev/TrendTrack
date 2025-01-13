@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import TokenManager from "../services/TokenManager";
 import "./EditUser.css";
 
 const EditUser = ({ user, onSave, onCancel }) => {
@@ -19,6 +20,10 @@ const EditUser = ({ user, onSave, onCancel }) => {
   const onSubmit = (data) => {
     onSave({ ...data, id: user.id });
   };
+
+  //admin role
+  const claims = TokenManager.getClaims();
+  const isAdmin = claims && claims.roles && claims.roles.includes("ADMIN");
 
   return (
     <div className="edit-user-form">
@@ -76,9 +81,11 @@ const EditUser = ({ user, onSave, onCancel }) => {
           <button type="submit" className="save-btn">
             Save
           </button>
-          <button type="button" className="cancel-btn" onClick={onCancel}>
-            Cancel
-          </button>
+          {isAdmin && (
+            <button type="button" className="cancel-btn" onClick={onCancel}>
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     </div>
