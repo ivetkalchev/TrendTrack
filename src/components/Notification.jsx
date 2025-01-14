@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import './Notification.css';
 
-const Notification = ({ message }) => {
+const Notification = ({ message, onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+      if (onClose) {
+        onClose();
+      }
+    }, 13000); 
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   const handleClose = () => {
     setIsVisible(false);
+    if (onClose) {
+      onClose();
+    }
   };
 
   return (

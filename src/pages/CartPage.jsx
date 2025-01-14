@@ -4,23 +4,25 @@ import orderService from "../services/orderService";
 import CartItem from "../components/CartItem";
 import "./CartPage.css";
 
-const CartPage = () => {
+const CartPage = ({ notification }) => {
   const [cart, setCart] = useState(null);
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const data = await cartService.getCart();
-        setCart(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
+  // Fetch the cart data
+  const fetchCart = async () => {
+    try {
+      const data = await cartService.getCart();
+      setCart(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
+  // Fetch cart on mount and whenever `notification` changes
+  useEffect(() => {
     fetchCart();
-  }, []);
+  }, [notification]);
 
   const recalculateTotalCost = (items) => {
     return items.reduce((total, item) => total + item.totalPrice, 0);
@@ -72,7 +74,7 @@ const CartPage = () => {
         address,
         totalAmount: cart.totalCost,
       };
-      
+
       await orderService.createOrder(orderData);
       alert("Order placed successfully!");
 
