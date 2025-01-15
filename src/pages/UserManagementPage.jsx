@@ -6,7 +6,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import TokenManager from "../services/tokenManager";
 import EditUser from "../components/EditUser";
-import UserFilter from "../components/UserFilter"; // Import the filter component
+import UserFilter from "../components/UserFilter";
 
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
@@ -57,7 +57,7 @@ const UserManagementPage = () => {
     setPagination((prevState) => ({
       ...prevState,
       filters,
-      page: 0, // Reset to the first page when applying filters
+      page: 0,
     }));
   };
 

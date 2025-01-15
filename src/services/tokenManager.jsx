@@ -24,7 +24,23 @@ const TokenManager = {
             return claims.userId;
         }
         return null;
-    }
+    },
+    isAuthenticated: () => {
+        const token = TokenManager.getAccessToken();
+        if (!token) {
+          return false;
+        }
+    
+        const claims = TokenManager.getClaims();
+        if (claims && claims.exp) {
+          const currentTime = Math.floor(Date.now() / 1000);
+          if (claims.exp < currentTime) {
+            TokenManager.clear(); 
+            return false;
+          }
+        }
+        return true;
+      }
 }
  
 export default TokenManager;

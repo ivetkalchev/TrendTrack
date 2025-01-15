@@ -14,6 +14,7 @@ import StatisticsPage from './pages/StatisticsPage';
 import { Client } from '@stomp/stompjs';
 import TokenManager from './services/tokenManager';
 import Notification from './components/Notification';
+import ProtectedRoute from './services/protectedRoute';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -61,15 +62,15 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/fabric-management" element={<FabricManagementPage />} />
+        <Route path="/fabric-management" element={<ProtectedRoute element={<FabricManagementPage />} />} />
         <Route path="/authentication" element={<AuthenticationPage />} />
-        <Route path="/user-management" element={<UserManagementPage />} />
-        <Route path="/my-account" element={<PersonalInfoPage />} />
+        <Route path="/user-management" element={<ProtectedRoute element={<UserManagementPage />} />} />
+        <Route path="/my-account" element={<ProtectedRoute element={<PersonalInfoPage />} />} />
         <Route path="/catalogue" element={<CataloguePage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/orders" element={<OrderPage />} />
-        <Route path="/my-orders" element={<UserOrdersPage />} />
-        <Route path="/statistics" element={<StatisticsPage />} />
+        <Route path="/cart" element={<ProtectedRoute element={<CartPage />} />} />
+        <Route path="/orders" element={<ProtectedRoute element={<OrderPage />} />} />
+        <Route path="/my-orders" element={<ProtectedRoute element={<UserOrdersPage />} />} />
+        <Route path="/statistics" element={<ProtectedRoute element={<StatisticsPage />} />} />
       </Routes>
       <Footer />
     </Router>

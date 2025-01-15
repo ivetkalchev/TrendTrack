@@ -8,18 +8,21 @@ const CartPage = ({ notification }) => {
   const [cart, setCart] = useState(null);
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
+  const [unauthorized, setUnauthorized] = useState(false);
 
-  // Fetch the cart data
   const fetchCart = async () => {
     try {
       const data = await cartService.getCart();
       setCart(data);
     } catch (err) {
-      setError(err.message);
+      if (err.response && err.response.status === 401) {
+        setUnauthorized(true);
+      } else {
+        setError(err.message);
+      }
     }
   };
 
-  // Fetch cart on mount and whenever `notification` changes
   useEffect(() => {
     fetchCart();
   }, [notification]);
@@ -31,7 +34,6 @@ const CartPage = ({ notification }) => {
   const handleRemoveItem = async (fabricId) => {
     try {
       await cartService.removeFromCart(fabricId);
-      alert("Item removed successfully!");
       setCart((prevCart) => {
         const updatedItems = prevCart.items.filter((item) => item.fabric.id !== fabricId);
         return {
@@ -85,6 +87,10 @@ const CartPage = ({ notification }) => {
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
   };
+
+  if (unauthorized) {
+    return <div className="not-authorized">You have no access to this page. Please log in.</div>;
+  }
 
   if (!cart) {
     return <div>Loading...</div>;
