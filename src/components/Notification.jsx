@@ -14,7 +14,7 @@ const Notification = ({ message, onClose }) => {
     }, 13000); 
 
     return () => clearTimeout(timer);
-  }, [onClose]);
+  }, []);
 
   const handleClose = () => {
     setIsVisible(false);

@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import "./PurchaseFabric.css";
 import { FaImage, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import cartService from "../services/cartService";
+import TokenManager from "../services/tokenManager";
 
 const PurchaseFabric = ({ product }) => {
   const [addedToCart, setAddedToCart] = useState(false);
+
+  const isAuthenticated = TokenManager.isAuthenticated();
 
   const handleAddToCart = async () => {
     if (product.stock === 0) return;
@@ -53,16 +56,18 @@ const PurchaseFabric = ({ product }) => {
           )}
           <span>Ironed</span>
         </div>
-        <div className="button-container">
-          <button
-            className={`cart-button ${product.stock === 0 ? 'disabled' : ''}`}
-            onClick={handleAddToCart}
-            disabled={product.stock === 0}
-          >
-            {product.stock === 0 ? 'Sold Out' : 'Add To Cart'}
-          </button>
-          {addedToCart && <span className="added-message">Added to cart!</span>}
-        </div>
+        {isAuthenticated && (
+          <div className="button-container">
+            <button
+              className={`cart-button ${product.stock === 0 ? 'disabled' : ''}`}
+              onClick={handleAddToCart}
+              disabled={product.stock === 0}
+            >
+              {product.stock === 0 ? 'Sold Out' : 'Add To Cart'}
+            </button>
+            {addedToCart && <span className="added-message">Added to cart!</span>}
+          </div>
+        )}
       </div>
     </div>
   );

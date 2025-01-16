@@ -44,9 +44,21 @@ const OrderPage = () => {
   const hasNextPage = orders.length === pagination.size;
   
   const handleStatusChange = async (orderId, status) => {
+    const order = orders.find((order) => order.id === orderId);
+    
+    if (order.status === "DELIVERED") {
+      alert("This order has already been delivered and cannot be changed.");
+      return;
+    }
+  
+    if (order.status === "PENDING" && status === "DELIVERED") {
+      alert("You cannot move an order from PENDING to DELIVERED directly.");
+      return;
+    }
+  
     try {
       await orderService.updateOrder(orderId, { status });
-      setFilteredOrders((prevOrders) =>
+      setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order.id === orderId ? { ...order, status } : order
         )
@@ -54,7 +66,7 @@ const OrderPage = () => {
     } catch (err) {
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
-  };
+  };    
 
   const handleDeleteOrder = async (orderId) => {
     try {
