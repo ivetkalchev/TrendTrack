@@ -23,22 +23,42 @@ const StatisticsPage = () => {
 
   const pagination = { page: 0, size: 9 };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const ordersData = await orderService.getAllOrders({});
-        
-        const usersData = await getAllUsers({ page: pagination.page, size: pagination.size });
-        
-        setOrders(ordersData.orders);
-        setUsers(usersData.users);
-      } catch (err) {
-        console.error("Error fetching data:", err.message);
-        setError("Failed to load statistics. Please try again.");
+  // Helper function to fetch all data with pagination
+  const fetchAllData = async () => {
+    try {
+      // Fetch orders
+      let ordersData = [];
+      let ordersPage = pagination.page;
+      let ordersMoreData = true;
+      while (ordersMoreData) {
+        const response = await orderService.getAllOrders({ page: ordersPage, size: pagination.size });
+        ordersData = [...ordersData, ...response.orders];
+        ordersMoreData = response.orders.length === pagination.size;
+        ordersPage++;
       }
-    };
 
-    fetchData();
+      // Fetch users
+      let usersData = [];
+      let usersPage = pagination.page;
+      let usersMoreData = true;
+      while (usersMoreData) {
+        const response = await getAllUsers({ page: usersPage, size: pagination.size });
+        usersData = [...usersData, ...response.users];
+        usersMoreData = response.users.length === pagination.size;
+        usersPage++;
+      }
+
+      // Set the data to the state
+      setOrders(ordersData);
+      setUsers(usersData);
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+      setError("Failed to load statistics. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    fetchAllData();
   }, []);
 
   useEffect(() => {

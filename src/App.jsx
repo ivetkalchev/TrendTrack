@@ -58,22 +58,26 @@ const App = () => {
 
   return (
     <Router>
-      {notification && <Notification message={notification} />}
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/fabric-management" element={<ProtectedRoute element={<FabricManagementPage />} />} />
-        <Route path="/authentication" element={<AuthenticationPage />} />
-        <Route path="/user-management" element={<ProtectedRoute element={<UserManagementPage />} />} />
-        <Route path="/my-account" element={<ProtectedRoute element={<PersonalInfoPage />} />} />
-        <Route path="/catalogue" element={<CataloguePage />} />
-        <Route path="/cart" element={<ProtectedRoute element={<CartPage />} />} />
-        <Route path="/orders" element={<ProtectedRoute element={<OrderPage />} />} />
-        <Route path="/my-orders" element={<ProtectedRoute element={<UserOrdersPage />} />} />
-        <Route path="/statistics" element={<ProtectedRoute element={<StatisticsPage />} />} />
-      </Routes>
-      <Footer />
-    </Router>
+  {notification && <Notification message={notification} />}
+  <Header />
+    <Routes>
+      {/* unauth */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/authentication" element={<AuthenticationPage />} />
+      <Route path="/catalogue" element={<CataloguePage />} />
+      {/* admin */}
+      <Route path="/fabric-management" element={<ProtectedRoute element={<FabricManagementPage />} requiredRole="ADMIN"/>} />
+      <Route path="/user-management" element={<ProtectedRoute element={<UserManagementPage />} requiredRole="ADMIN"/>} />
+      <Route path="/statistics" element={<ProtectedRoute element={<StatisticsPage />} requiredRole="ADMIN"/>} />
+      <Route path="/orders" element={<ProtectedRoute element={<OrderPage />} requiredRole="ADMIN"/>} />
+      {/* client */}
+      <Route path="/cart" element={<ProtectedRoute element={<CartPage />} requiredRole="CLIENT"/>} />
+      <Route path="/my-orders" element={<ProtectedRoute element={<UserOrdersPage />} requiredRole="CLIENT"/>} />
+      {/* auth */}
+      <Route path="/my-account" element={<ProtectedRoute element={<PersonalInfoPage />} requiredRole="CLIENT,ADMIN" />} />
+    </Routes>
+    <Footer />
+  </Router>
   );
 };
 

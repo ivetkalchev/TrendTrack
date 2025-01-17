@@ -13,6 +13,7 @@ const PersonalInfoPage = () => {
     const fetchUserDetails = async () => {
       try {
         const userId = TokenManager.getUserIdFromToken();
+        console.log = ("User", userId);
         if (!userId) throw new Error("Invalid or missing user ID in token.");
         const response = await getUserDetailsById(userId);
         setUser(response);

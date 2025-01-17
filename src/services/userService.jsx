@@ -20,7 +20,6 @@ export const getAllUsers = async ({ username, firstName, lastName, page, size })
   } catch (error) {
     if (error.response && error.response.status === 401) {
       alert("Unauthorized. Please log in again.");
-      localStorage.removeItem("accessToken");
     }
     throw new Error(`Failed to fetch users: ${error.message}`);
   }
@@ -37,7 +36,6 @@ export const deleteUser = async (id) => {
   } catch (error) {
     if (error.response && error.response.status === 401) {
       alert("Unauthorized. Please log in again.");
-      localStorage.removeItem("accessToken");
     }
     throw new Error(`Failed to delete user: ${error.response?.data?.message || error.message}`);
   }
@@ -59,7 +57,6 @@ export const editUser = async (id, user, token) => {
     console.error("Error while editing user:", error.response || error.message);
     if (error.response && error.response.status === 401) {
       alert("Unauthorized. Please log in again.");
-      localStorage.removeItem("accessToken");
     }
     throw new Error(`Failed to edit user: ${error.response?.data?.message || error.message}`);
   }
@@ -72,10 +69,10 @@ export const getUserDetailsById = async (id) => {
     });
     return response.data;
   } catch (error) {
-    if (error.response && error.response.status === 401) {
-      alert("Unauthorized. Please log in again.");
+    if (error.response) {
+      /*alert("Unauthorized. Please log in again.");
       TokenManager.clear();
-      window.location.href = "/login";
+      window.location.href = "/authentication";*/
     }
     console.error("Error fetching user details:", error);
     throw new Error(`Failed to fetch user details: ${error.message}`);

@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import TokenManager from "../services/TokenManager";
+import TokenManager from "../services/tokenManager";
 import "./EditUser.css";
 
 const EditUser = ({ user, onSave, onCancel }) => {
