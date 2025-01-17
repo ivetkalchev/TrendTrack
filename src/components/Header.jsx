@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import TokenManager from "../services/tokenManager";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const accessToken = TokenManager.getAccessToken();
@@ -20,6 +21,7 @@ const Header = () => {
     TokenManager.clear();
     setIsLoggedIn(false);
     setRole(null);
+    navigate("/authentication"); 
   };
 
   const renderLinks = () => {
