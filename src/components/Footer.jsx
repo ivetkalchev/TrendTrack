@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa'; 
+import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'; 
 import needleIcon from "../assets/img/needle.png";
 
 const Footer = () => {

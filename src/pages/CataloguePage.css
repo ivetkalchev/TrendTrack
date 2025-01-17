@@ -20,3 +20,34 @@
   h1 {
     text-align: center;
   }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .pagination-controls span{
+    margin-top: 8px;
+  }
+  
+  .pagination-controls button {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #9c7de3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination-controls button:hover {
+    background-color: #7a5bbb;
+  }
+  
+  .pagination-controls button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }

@@ -33,19 +33,15 @@ const FabricControlPanel = ({ product, onDelete, onUpdate }) => {
     setIsEditing(false);
   };
 
-  const placeholderImage = (
-    <div className="placeholder-control-image">
-      <FaImage size={50} color="#ddd" />
-    </div>
-  );
-
   return (
     <div className="product-admin-item">
       <div className="product-image">
         {product.pictureUrl ? (
           <img src={product.pictureUrl} alt={product.name} />
         ) : (
-          placeholderImage
+          <div className="placeholder-image">
+            <FaImage size={50} color="#ddd" />
+          </div>
         )}
       </div>
       <div className="product-header">

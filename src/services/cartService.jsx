@@ -26,7 +26,7 @@ const cartService = {
     }
     const response = await axios.post(
       `${BASE_URL}/cart/${userId}/add`,
-      { fabricId, quantity }, // Sending payload as the request body
+      { fabricId, quantity },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -35,7 +35,7 @@ const cartService = {
       }
     );
     return response.data;
-  },
+  },  
 
   updateCartItem: async (fabricId, quantity) => {
     const token = TokenManager.getAccessToken();
@@ -45,7 +45,7 @@ const cartService = {
     }
     const response = await axios.put(
       `${BASE_URL}/cart/${userId}/update`,
-      { fabricId, quantity }, // Sending payload as the request body
+      { fabricId, quantity },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const cartService = {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        params: { fabricId }, // Pass as query parameter
+        params: { fabricId },
       }
     );
     return response.data;

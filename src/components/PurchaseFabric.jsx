@@ -1,26 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PurchaseFabric.css";
 import { FaImage, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import cartService from "../services/cartService";
+import TokenManager from "../services/tokenManager";
 
 const PurchaseFabric = ({ product }) => {
-  const handleAddToCart = async () => {
-    try {
-      const item = {
-        id: product.id,
-        name: product.name,
-        price: product.price, // Include price
-        quantity: 1, // Default quantity
-      };
-      console.log("Adding to cart:", item);
+  const [addedToCart, setAddedToCart] = useState(false);
 
-      await cartService.addToCart(product.id, 1); // Fixed to align with updated service
-      alert("Item added to cart successfully!");
+  const isAuthenticated = TokenManager.isAuthenticated();
+
+  const handleAddToCart = async () => {
+    if (product.stock === 0) return;
+  
+    try {
+      await cartService.addToCart(product.id, 1);
+  
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 2000);
     } catch (err) {
-      console.error("Error adding to cart:", err.response?.data || err.message);
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
-  };
+  };  
 
   return (
     <div className="product-admin-item">
@@ -56,11 +56,18 @@ const PurchaseFabric = ({ product }) => {
           )}
           <span>Ironed</span>
         </div>
-        <div className="button-container">
-          <button className="cart-button" onClick={handleAddToCart}>
-            Add To Cart
-          </button>
-        </div>
+        {isAuthenticated && (
+          <div className="button-container">
+            <button
+              className={`cart-button ${product.stock === 0 ? 'disabled' : ''}`}
+              onClick={handleAddToCart}
+              disabled={product.stock === 0}
+            >
+              {product.stock === 0 ? 'Sold Out' : 'Add To Cart'}
+            </button>
+            {addedToCart && <span className="added-message">Added to cart!</span>}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getUserDetailsById, editUser } from "../services/userService"; // Import necessary services
-import TokenManager from "../services/tokenManager"; // Import TokenManager
-import EditUser from "../components/EditUser"; // Import the new EditUser component
+import { getUserDetailsById, editUser } from "../services/userService";
+import TokenManager from "../services/tokenManager";
+import EditUser from "../components/EditUser";
 import "./PersonalInfoPage.css";
 
 const PersonalInfoPage = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const [user, setUser] = useState(null); // Store the user details
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const userId = TokenManager.getUserIdFromToken();
+        console.log = ("User", userId);
         if (!userId) throw new Error("Invalid or missing user ID in token.");
         const response = await getUserDetailsById(userId);
-        setUser(response); // Set user data for editing
+        setUser(response);
       } catch (err) {
         setError("Failed to load your personal information. Please try again.");
       }

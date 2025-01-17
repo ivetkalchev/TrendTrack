@@ -13,7 +13,6 @@ import orderService from "../services/orderService";
 import { getAllUsers } from "../services/userService";
 import "./StatisticsPage.css";
 
-// Register required components
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
 const StatisticsPage = () => {
@@ -22,20 +21,42 @@ const StatisticsPage = () => {
   const [error, setError] = useState(null);
   const [stats, setStats] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const ordersData = await orderService.getAllOrders();
-        const usersData = await getAllUsers();
-        setOrders(ordersData.orders);
-        setUsers(usersData.users);
-      } catch (err) {
-        console.error("Error fetching data:", err.message);
-        setError("Failed to load statistics. Please try again.");
-      }
-    };
+  const pagination = { page: 0, size: 9 };
 
-    fetchData();
+  const fetchAllData = async () => {
+    try {
+      //orders
+      let ordersData = [];
+      let ordersPage = pagination.page;
+      let ordersMoreData = true;
+      while (ordersMoreData) {
+        const response = await orderService.getAllOrders({ page: ordersPage, size: pagination.size });
+        ordersData = [...ordersData, ...response.orders];
+        ordersMoreData = response.orders.length === pagination.size;
+        ordersPage++;
+      }
+
+      //users
+      let usersData = [];
+      let usersPage = pagination.page;
+      let usersMoreData = true;
+      while (usersMoreData) {
+        const response = await getAllUsers({ page: usersPage, size: pagination.size });
+        usersData = [...usersData, ...response.users];
+        usersMoreData = response.users.length === pagination.size;
+        usersPage++;
+      }
+
+      setOrders(ordersData);
+      setUsers(usersData);
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+      setError("Failed to load statistics. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    fetchAllData();
   }, []);
 
   useEffect(() => {
@@ -122,7 +143,7 @@ const StatisticsPage = () => {
             />
           </div>
           <div className="stat chart">
-            <h3>Order Status</h3><br></br>
+            <h3>Order Status</h3>
             <Pie
               data={{
                 labels: Object.keys(stats.statusCounts),

@@ -7,8 +7,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* hero section */
-
 .home-container {
   text-align: center;
   color: #333;
@@ -78,8 +76,6 @@ html {
     opacity: 1;
   }
 }
-
-/* about us section */
 
 .about-section {
   max-width: 1200px;

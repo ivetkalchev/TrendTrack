@@ -12,7 +12,6 @@ const Header = () => {
     setIsLoggedIn(!!accessToken);
     if (accessToken) {
       const claims = TokenManager.getClaims();
-      console.log("Claims:", claims); // Debugging line
       setRole(claims?.roles?.[0] || null);
     }
   }, []);

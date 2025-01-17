@@ -12,7 +12,7 @@ export const login = async (credentials) => {
       }
     );
     localStorage.setItem("authToken", response.data.token);
-    window.location.href = "/";
+    window.location.href = "/catalogue";
     return response.data;
   } catch (error) {
     throw new Error(`Failed to login: ${error.message}`);

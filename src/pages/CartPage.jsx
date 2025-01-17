@@ -4,24 +4,28 @@ import orderService from "../services/orderService";
 import CartItem from "../components/CartItem";
 import "./CartPage.css";
 
-const CartPage = () => {
+const CartPage = ({ notification }) => {
   const [cart, setCart] = useState(null);
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
+  const [unauthorized, setUnauthorized] = useState(false);
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const data = await cartService.getCart();
-        setCart(data);
-      } catch (err) {
-        console.error("Error fetching cart:", err.message); // Log the error
+  const fetchCart = async () => {
+    try {
+      const data = await cartService.getCart();
+      setCart(data);
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        setUnauthorized(true);
+      } else {
         setError(err.message);
       }
-    };
+    }
+  };
 
+  useEffect(() => {
     fetchCart();
-  }, []);
+  }, [notification]);
 
   const recalculateTotalCost = (items) => {
     return items.reduce((total, item) => total + item.totalPrice, 0);
@@ -30,8 +34,6 @@ const CartPage = () => {
   const handleRemoveItem = async (fabricId) => {
     try {
       await cartService.removeFromCart(fabricId);
-      alert("Item removed successfully!");
-      // Update cart state locally after successful deletion and recalculate total
       setCart((prevCart) => {
         const updatedItems = prevCart.items.filter((item) => item.fabric.id !== fabricId);
         return {
@@ -49,9 +51,9 @@ const CartPage = () => {
   const handleUpdateQuantity = async (fabricId, quantity) => {
     try {
       const updatedCart = await cartService.updateCartItem(fabricId, quantity);
-      setCart(updatedCart); // Server already sends updated total cost
+      setCart(updatedCart);
     } catch (err) {
-      console.error("Error updating item quantity:", err.message); // Log the error
+      console.error("Error updating item quantity:", err.message);
       setError(err.message);
     }
   };
@@ -64,7 +66,7 @@ const CartPage = () => {
 
     try {
       const orderData = {
-        user: cart.user, // Assuming the cart includes user information
+        user: cart.user,
         items: cart.items.map((item) => ({
           fabric: item.fabric,
           quantity: item.quantity,
@@ -74,11 +76,10 @@ const CartPage = () => {
         address,
         totalAmount: cart.totalCost,
       };
-      
+
       await orderService.createOrder(orderData);
       alert("Order placed successfully!");
 
-      // Clear the cart locally
       setCart({ ...cart, items: [], totalCost: 0 });
       setAddress("");
     } catch (err) {
@@ -86,6 +87,10 @@ const CartPage = () => {
       alert(`Error: ${err.response?.data?.detail || err.message}`);
     }
   };
+
+  if (unauthorized) {
+    return <div className="not-authorized">You have no access to this page. Please log in.</div>;
+  }
 
   if (!cart) {
     return <div>Loading...</div>;
@@ -95,7 +100,7 @@ const CartPage = () => {
     <div className="cart-page">
       <h1>Your Cart</h1>
       {error && <p className="inline-error">There was an error: {error}</p>}
-      {cart.items.length === 0 ? ( // Check if the cart is empty
+      {cart.items.length === 0 ? (
         <div className="empty-cart-message">
           <p>Your cart is empty!</p>
         </div>
@@ -123,7 +128,7 @@ const CartPage = () => {
               className="address-input"
             />
             <button className="proceed-order-button" onClick={handleProceedOrder}>
-              Proceed with Order
+              Proceed with Your Order
             </button>
           </div>
         </>

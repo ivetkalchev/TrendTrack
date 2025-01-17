@@ -31,6 +31,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-left: 30px;
 }
 
 .add-product-button:hover {
@@ -40,10 +41,11 @@
 
 h2 {
   color: #3e1c42;
-  margin: 0;
+  margin-bottom: 10px;
   font-size: 30px;
   font-family: 'Playfair Display', serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 .header-container {
@@ -51,20 +53,7 @@ h2 {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-}
-
-.filter-input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-right: 10px;
-  width: 250px;
-}
-
-.filter-input:focus {
-  border-color: #4A334C;
-  outline: none;
+  margin-left: 70px;
 }
 
 .actions {
@@ -87,4 +76,35 @@ h2 {
   border-radius: 5px;
   text-align: center;
   font-size: 16px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-controls span{
+  margin-top: 8px;
+}
+
+.pagination-controls button {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: #9c7de3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:hover {
+  background-color: #7a5bbb;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
 }
