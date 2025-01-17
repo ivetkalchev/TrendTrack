@@ -22,7 +22,7 @@ const App = () => {
   const [notification, setNotification] = useState('');
 
   const setupStompClient = (username) => {
-    // stomp client over websockets
+    //stomp client over websockets
     const stompClient = new Client({
       brokerURL: 'ws://localhost:8080/ws',
       reconnectDelay: 5000,
@@ -31,22 +31,22 @@ const App = () => {
     });
 
     stompClient.onConnect = () => {
-      // subscribe to the backend public topic
+      //subscribe to the backend public topic
       stompClient.subscribe('/topic/publicmessages', (data) => {
         console.log(data);
         onMessageReceived(data);
       });
-      // subscribe to the backend "private" topic
+      //subscribe to the backend "private" topic
       stompClient.subscribe(`/user/${username}/queue/notification`, (data) => {
         onMessageReceived(data);
       });
     };
 
-    // initiate client
+    //initiate client
     stompClient.activate();
   };
 
-  // display the received data
+  //display the received data
   const onMessageReceived = (data) => {
     const message = JSON.parse(data.body);
     setNotification(message.text);

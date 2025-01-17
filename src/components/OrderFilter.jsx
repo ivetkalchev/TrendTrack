@@ -5,8 +5,8 @@ const OrderFilter = ({ onFilter }) => {
   const [id, setId] = useState("");
   const [orderDate, setOrderDate] = useState("");
   const [status, setStatus] = useState("");
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(9);
+  const [page] = useState(0);
+  const [size] = useState(9);
 
   const handleSubmit = (e) => {
     e.preventDefault();

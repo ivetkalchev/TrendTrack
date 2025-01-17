@@ -23,10 +23,9 @@ const StatisticsPage = () => {
 
   const pagination = { page: 0, size: 9 };
 
-  // Helper function to fetch all data with pagination
   const fetchAllData = async () => {
     try {
-      // Fetch orders
+      //orders
       let ordersData = [];
       let ordersPage = pagination.page;
       let ordersMoreData = true;
@@ -37,7 +36,7 @@ const StatisticsPage = () => {
         ordersPage++;
       }
 
-      // Fetch users
+      //users
       let usersData = [];
       let usersPage = pagination.page;
       let usersMoreData = true;
@@ -48,7 +47,6 @@ const StatisticsPage = () => {
         usersPage++;
       }
 
-      // Set the data to the state
       setOrders(ordersData);
       setUsers(usersData);
     } catch (err) {

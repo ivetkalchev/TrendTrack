@@ -80,7 +80,7 @@ const FabricManagementPage = () => {
     setPagination((prevState) => ({
       ...prevState,
       filters,
-      page: 0,  // Reset to the first page when filtering
+      page: 0,
     }));
   };
 

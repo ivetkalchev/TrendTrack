@@ -21,7 +21,6 @@ const EditUser = ({ user, onSave, onCancel }) => {
     onSave({ ...data, id: user.id });
   };
 
-  //admin role
   const claims = TokenManager.getClaims();
   const isAdmin = claims && claims.roles && claims.roles.includes("ADMIN");
 

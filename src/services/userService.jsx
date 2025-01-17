@@ -70,9 +70,6 @@ export const getUserDetailsById = async (id) => {
     return response.data;
   } catch (error) {
     if (error.response) {
-      /*alert("Unauthorized. Please log in again.");
-      TokenManager.clear();
-      window.location.href = "/authentication";*/
     }
     console.error("Error fetching user details:", error);
     throw new Error(`Failed to fetch user details: ${error.message}`);
